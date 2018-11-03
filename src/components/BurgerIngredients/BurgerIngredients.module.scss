@@ -1,0 +1,11 @@
+.BurgerContainer{
+  display:grid;
+  justify-items: center;
+  padding-top:2rem;
+  margin-bottom:2rem;
+  overflow-y:scroll;
+}
+.Burger{
+  height:21rem;
+  width:27rem;
+}
