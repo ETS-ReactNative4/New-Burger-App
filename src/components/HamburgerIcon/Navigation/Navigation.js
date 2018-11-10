@@ -16,10 +16,10 @@ const Navigation=(props)=>{
   return(
     <div className={props.show?backgroundName.join(''):backgroundName.join('')}>
     <ul className={classes.ul_grid}>
-        <li className={props.show?liName.join(''):liName.join('')}><a href="">Home</a></li>
-        <li className={props.show?liName.join(''):liName.join('')}><a href="">About</a></li>
-        <li className={props.show?liName.join(''):liName.join('')}><a href="">Contact</a></li>
-        <li className={props.show?liName.join(''):liName.join('')}><a href="">Profile</a></li>
+        <li className={props.show?liName.join(''):liName.join('')}><a href="./">Home</a></li>
+        <li className={props.show?liName.join(''):liName.join('')}><a href="./">About</a></li>
+        <li className={props.show?liName.join(''):liName.join('')}><a href="./">Contact</a></li>
+        <li className={props.show?liName.join(''):liName.join('')}><a href="./">Profile</a></li>
     </ul>
     </div>
   ) 

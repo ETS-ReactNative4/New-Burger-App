@@ -5,8 +5,8 @@ import BuildContols from '../../components/BuildControls/BuildContols';
 import classes from './BurgerBuilder.module.scss';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
-import HamburgerIcon from '../../components/HamburgerIcon/HamburgerIcon';
-import HamburgerMenu from '../../components/Navigation/HamburgerMenu';
+import Loader from '../../components/UI/Loader/Loader';
+
  const prices={
   'Salad':5,
   'Meat':50,
@@ -23,9 +23,12 @@ import HamburgerMenu from '../../components/Navigation/HamburgerMenu';
     },
     totalPrice:10,
     purChaseBurger:false,
-    hamBurger:true
+    hamBurger:true,
+    checkout:false,
+    loading:false,
+    Message:false
    }
-  
+
    addHandler=(item)=>{
     
     const currentItemNumber=this.state.ingredients[item];
@@ -51,16 +54,48 @@ import HamburgerMenu from '../../components/Navigation/HamburgerMenu';
     }
 
    }
-   purChaseHandler=()=>{
-     
-     this.setState({purChaseBurger:true});
-     
+   purChaseHandler=()=>{   
+     this.setState({purChaseBurger:true});   
    }
    closeModal=()=>{
     this.setState({purChaseBurger:false});
    }
    buy=()=>{
-     alert('want to purchase??')
+     if(this.state.totalPrice!==10){
+      this.setState({loading:true,Message:false})
+    const data={
+      ingredients:this.state.ingredients,
+      totalPrice:this.state.totalPrice,
+      CustomerInfo:{
+        Name:'tanveer',
+        Address:'Chandgaon R/A',
+        Email:'tanveer@gmail.com',
+        Mobile_No:'0171.....'
+      }
+    };
+    fetch('https://testing-bc79f.firebaseio.com/orders.json',{
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data),
+    }).then(res=>{this.setState({loading:false,purChaseBurger:false})})
+    .catch(err=>{this.setState({loading:false,purChaseBurger:false})})
+     }else{  
+      this.setState({Message:true});
+      this.setState({loading:true});
+      setTimeout(()=>{
+        this.setState({loading:false,Message:false});
+      },2000)
+ 
+     }
+     
    }
    hamBurgerController=()=>{
     this.setState((prevState)=>{
@@ -68,17 +103,29 @@ import HamburgerMenu from '../../components/Navigation/HamburgerMenu';
     });
    }
   render(){
+    let orderSummary;
+    if(this.state.loading){
+      if(this.state.Message){
+        orderSummary=<h3>Please add the ingrdients in your burger..</h3>
+        
+      }else{
+        orderSummary=<Loader />
+      }
+     
+    }else{
+      
+      orderSummary= <OrderSummary requestOrder={this.state.purChaseBurger} ingredients={this.state.ingredients} closeModal={this.closeModal} buy={this.buy}
+      totalPrice={this.state.totalPrice}
+      />
+    }
     return(
       <Aux>
- 
         <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price}><strong>Total Price: </strong><span className={classes.mainPrice}>{this.state.totalPrice} </span>tk</p>
           <BuildContols add={this.addHandler} remove={this.removeHandler}/>
           <Modal requestOrder={this.state.purChaseBurger} closeModal={this.closeModal}>
-            <OrderSummary requestOrder={this.state.purChaseBurger} ingredients={this.state.ingredients} closeModal={this.closeModal} buy={this.buy}
-            totalPrice={this.state.totalPrice}
-            />
+            {orderSummary}
           </Modal>
           <button className={classes.orderBtn} onClick={this.purChaseHandler}>Order</button>
         </div>

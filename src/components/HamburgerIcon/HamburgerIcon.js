@@ -4,6 +4,7 @@ import classes from './HamburgerIcon.module.scss';
 import Navigation from './Navigation/Navigation';
 
 class  HamburgerIcon extends Component{
+
   state={
     hamBurger:false
    }
@@ -16,7 +17,7 @@ class  HamburgerIcon extends Component{
 
   render(){
     let itemName=[];
-    console.log(this.state.hamBurger);
+    
     if(this.state.hamBurger){
       itemName.push(classes.menu_btn +' '+ classes.close);
     }else{
