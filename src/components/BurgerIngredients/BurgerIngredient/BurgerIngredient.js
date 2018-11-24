@@ -13,7 +13,7 @@ const BurgerIngredient=(props)=>{
                </div>
     break;
     case('Salad'):
-      ingredient=<div className={classes.Salad}> </div>
+      ingredient=<div className={classes.Salad}></div>
       break;
     case('Cheese'):
       ingredient=<div className={classes.Cheese}></div>

@@ -62,31 +62,12 @@ import Loader from '../../components/UI/Loader/Loader';
    }
    buy=()=>{
      if(this.state.totalPrice!==10){
-      this.setState({loading:true,Message:false})
-    const data={
-      ingredients:this.state.ingredients,
-      totalPrice:this.state.totalPrice,
-      CustomerInfo:{
-        Name:'tanveer',
-        Address:'Chandgaon R/A',
-        Email:'tanveer@gmail.com',
-        Mobile_No:'0171.....'
-      }
-    };
-    fetch('https://testing-bc79f.firebaseio.com/orders.json',{
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data),
-    }).then(res=>{this.setState({loading:false,purChaseBurger:false})})
-    .catch(err=>{this.setState({loading:false,purChaseBurger:false})})
+      this.props.history.push({pathname:'/checkout',state:{
+        ingredients:this.state.ingredients,
+        totalPrice:this.state.totalPrice
+        }}
+      );
+
      }else{  
       this.setState({Message:true});
       this.setState({loading:true});

@@ -13,11 +13,11 @@ class Modal extends Component {
   render=()=>{
     return(
       <Aux>
-      <Backdrop show={this.props.requestOrder} closeModal={this.props.closeModal}/>
-      {this.props.requestOrder?    
-      <div className={this.props.requestOrder? classes.Modal: null}>
-        {this.props.children}
-      </div>:null }
+        <Backdrop show={this.props.requestOrder} closeModal={this.props.closeModal}/>
+        {this.props.requestOrder?    
+        <div className={this.props.requestOrder? classes.Modal: null}>
+          {this.props.children}
+        </div>:null }
       </Aux>
     )
   }
