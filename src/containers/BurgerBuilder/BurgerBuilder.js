@@ -6,7 +6,7 @@ import classes from './BurgerBuilder.module.scss';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Loader from '../../components/UI/Loader/Loader';
-
+ 
  const prices={
   'Salad':5,
   'Meat':50,
@@ -83,6 +83,7 @@ import Loader from '../../components/UI/Loader/Loader';
       return {hamBurger:!prevState.hamBurger}
     });
    }
+   
   render(){
     let orderSummary;
     if(this.state.loading){
@@ -99,12 +100,13 @@ import Loader from '../../components/UI/Loader/Loader';
       totalPrice={this.state.totalPrice}
       />
     }
+
     return(
       <Aux>
         <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
-          <p className={classes.price}><strong>Total Price: </strong><span className={classes.mainPrice}>{this.state.totalPrice} </span>tk</p>
-          <BuildContols add={this.addHandler} remove={this.removeHandler}/>
+          <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.state.totalPrice} </span>tk</p>
+          <BuildContols add={this.addHandler} remove={this.removeHandler} />
           <Modal requestOrder={this.state.purChaseBurger} closeModal={this.closeModal}>
             {orderSummary}
           </Modal>
