@@ -6,22 +6,10 @@ import classes from './BurgerBuilder.module.scss';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Loader from '../../components/UI/Loader/Loader';
- 
- const prices={
-  'Salad':5,
-  'Meat':50,
-  'Cheese':40,
-  'Chicken':30
- }
+import {connect} from 'react-redux';
+
  class BurgerBuilder extends Component{
    state={
-    ingredients:{
-      'Salad':0,
-      'Meat':0,
-      'Cheese':0,
-      'Chicken':0
-    },
-    totalPrice:10,
     purChaseBurger:false,
     hamBurger:true,
     checkout:false,
@@ -29,31 +17,6 @@ import Loader from '../../components/UI/Loader/Loader';
     Message:false
    }
 
-   addHandler=(item)=>{
-    
-    const currentItemNumber=this.state.ingredients[item];
-    const add=currentItemNumber+1;
-    const Upgradeingredients={...this.state.ingredients};
-    Upgradeingredients[item]=add;
-    const currentPrice=this.state.totalPrice;
-    const updatePrice=currentPrice+prices[item];
-    this.setState({ingredients:Upgradeingredients,totalPrice:updatePrice}); 
-
-   }
-   removeHandler=(item)=>{
-    let currentItemNumber=this.state.ingredients[item];
-    if(currentItemNumber!==0){
-      const remove=currentItemNumber-1;
-      const Upgradeingredients={...this.state.ingredients};
-      Upgradeingredients[item]=remove;
-      const currentPrice=this.state.totalPrice;
-      const updatePrice=currentPrice-prices[item];
-      this.setState({ingredients:Upgradeingredients,totalPrice:updatePrice});
-    }else{
-      return false;
-    }
-
-   }
    purChaseHandler=()=>{   
      this.setState({purChaseBurger:true});   
    }
@@ -61,10 +24,10 @@ import Loader from '../../components/UI/Loader/Loader';
     this.setState({purChaseBurger:false});
    }
    buy=()=>{
-     if(this.state.totalPrice!==10){
+     if(this.props.totalPrice!==10){
       this.props.history.push({pathname:'/checkout',state:{
-        ingredients:this.state.ingredients,
-        totalPrice:this.state.totalPrice
+        ingredients:this.props.ingredients,
+        totalPrice:this.props.totalPrice
         }}
       );
 
@@ -85,6 +48,7 @@ import Loader from '../../components/UI/Loader/Loader';
    }
    
   render(){
+    console.log(this.props);
     let orderSummary;
     if(this.state.loading){
       if(this.state.Message){
@@ -96,17 +60,17 @@ import Loader from '../../components/UI/Loader/Loader';
      
     }else{
       
-      orderSummary= <OrderSummary requestOrder={this.state.purChaseBurger} ingredients={this.state.ingredients} closeModal={this.closeModal} buy={this.buy}
-      totalPrice={this.state.totalPrice}
+      orderSummary= <OrderSummary requestOrder={this.state.purChaseBurger} ingredients={this.props.ingredients} closeModal={this.closeModal} buy={this.buy}
+      totalPrice={this.props.totalPrice}
       />
     }
 
     return(
       <Aux>
-        <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
+        <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
-          <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.state.totalPrice} </span>tk</p>
-          <BuildContols add={this.addHandler} remove={this.removeHandler} />
+          <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>
+          <BuildContols />
           <Modal requestOrder={this.state.purChaseBurger} closeModal={this.closeModal}>
             {orderSummary}
           </Modal>
@@ -116,4 +80,10 @@ import Loader from '../../components/UI/Loader/Loader';
     )
   }
 }
-export default BurgerBuilder;
+const mapStateToProps=state=>{
+  return{
+    ingredients:state.ingredients,
+    totalPrice:state.totalPrice
+  }
+}
+export default connect(mapStateToProps)(BurgerBuilder);

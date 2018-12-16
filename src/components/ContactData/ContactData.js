@@ -1,6 +1,4 @@
 import React,{Component} from 'react';
-import classes from './ContactData.module.scss';
-import Button from '../UI/Button/Button';
 class ContactData extends Component{
 
   state={

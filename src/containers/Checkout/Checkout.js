@@ -1,9 +1,12 @@
 import React,{Component} from 'react';
 import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredients';
-import Aux from '../../HOC/helper';
-import Button from '../../components/UI/Button/Button';
 import Loader from '../../components/UI/Loader/Loader';
 import ContactData from '../../components/ContactData/ContactData';
+import {connect} from 'react-redux';
+import initalState from '../../store/Actions/InitialState';
+import {Link} from 'react-router-dom';
+import pic from '../../pic/1.jpeg';
+import classes from './Checkout.module.scss';
 class Checkout extends Component{
   state={
     loading:false,
@@ -14,6 +17,7 @@ class Checkout extends Component{
     error:false
   }
   componentWillMount(){
+    console.log(this.props.location);
     this.setState({ ingredients:this.props.location.state.ingredients,
                     totalPrice:this.props.location.state.totalPrice
                   })
@@ -45,13 +49,15 @@ class Checkout extends Component{
 
     setTimeout(()=>{
       this.props.history.goBack();
+      this.props.dispatch(initalState())
     },4000)
   }
   render(){
- 
+      console.log(this.props);
       if(!this.state.loading){
         return(
-          <div style={{marginTop:'-1.4rem',textAlign:'center'}}>
+          <div style={{marginTop:'-1.4rem',textAlign:'center'}} >
+            <Link to="/"><h2>Logo</h2></Link>
             <h1 style={{textAlign:'center',paddingTop:'2rem'}}>We hope it tastes well!!</h1>
             <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
             <ContactData contactInfo={this.contactHandler} buy={this.buy}  error={(err)=>this.setState({error:err})}/>
@@ -73,5 +79,11 @@ class Checkout extends Component{
   }
 
 }
+const mapStateToProps=state=>{
+  return{
+    ingredients:state.ingredients,
+    totalPrice:state.totalPrice
+  }
+}
 
-export default Checkout;
+export default connect(mapStateToProps)(Checkout);

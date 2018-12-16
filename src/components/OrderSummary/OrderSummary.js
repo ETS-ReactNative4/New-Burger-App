@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import Aux from '../../HOC/helper';
 import Button from '../UI/Button/Button';
 import classes from './OrderSummary.module.scss';
-import Loader from '../UI/Loader/Loader';
+import {connect} from 'react-redux';
 
 class OrderSummary extends Component{
   
@@ -15,7 +15,7 @@ class OrderSummary extends Component{
           <p>A delicious Burger with the following ingredients:</p>
           <ul>
             <li>Salad:{this.props.ingredients.Salad}</li>
-            <li>Bacon:{this.props.ingredients.Bacon}</li>
+            <li>Chicken:{this.props.ingredients.Chicken}</li>
             <li>Cheese:{this.props.ingredients.Cheese}</li>
             <li>Meat:{this.props.ingredients.Meat}</li>
           </ul>
@@ -29,4 +29,11 @@ class OrderSummary extends Component{
     )
   }
 };
-export default OrderSummary;
+
+const mapStateToProps=state=>{
+  return{
+    ingredients:state.ingredients,
+    totalPrice:state.totalPrice
+  }
+}
+export default connect(mapStateToProps)(OrderSummary);

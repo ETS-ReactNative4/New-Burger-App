@@ -70,3 +70,10 @@
   cursor:pointer;
   transform: translateY(-2px);
 }
+.disable{
+  color: gray;
+  padding: 10px;
+  background: white;
+  border-radius: 3px;
+  transition:all .3s;
+}
