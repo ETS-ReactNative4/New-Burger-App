@@ -7,6 +7,7 @@ import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Loader from '../../components/UI/Loader/Loader';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
  class BurgerBuilder extends Component{
    state={
@@ -52,7 +53,7 @@ import {connect} from 'react-redux';
     let orderSummary;
     if(this.state.loading){
       if(this.state.Message){
-        orderSummary=<h3>Please add the ingrdients in your burger..</h3>
+        orderSummary=<div style={{height:'33rem'}}><h3>Please add the ingrdients in your burger..</h3></div>
         
       }else{
         orderSummary=<Loader />
@@ -67,6 +68,7 @@ import {connect} from 'react-redux';
 
     return(
       <Aux>
+        <Link to="/orders"><button className={classes.button}>Orders</button></Link>
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>

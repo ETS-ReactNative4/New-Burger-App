@@ -15,17 +15,19 @@
   letter-spacing:2px;
   font-size:25px;   
   font-family:'Lato','Courier New';
+  font-weight: 700;
+  color:yellow;
 }
 .Salad{
-  color:rgb(93, 216, 93);
   transition:all .3s;
   cursor: pointer;
+  
 }
 .Salad:hover{
   transform: rotate(-5deg) scale(1.1);
 }
 .Meat{
-  color:brown;
+
   transition:all .3s;
   cursor: pointer;
 }
@@ -33,7 +35,7 @@
   transform: rotate(-5deg) scale(1.1);
 }
 .Chicken{
-  color:orange;
+ 
   transition:all .3s;
   cursor: pointer;
 }
@@ -41,7 +43,7 @@
   transform: rotate(-5deg) scale(1.1);
 }
 .Cheese{
-  color:#EDB91F;
+ 
   transition:all .3s;
   cursor: pointer;
 }
@@ -49,31 +51,55 @@
   transform: rotate(-5deg) scale(1.1);
 }
 .add{
-  color: green;
-  padding: 10px;
-  background: white;
-  border-radius: 2px;
+  color: black;
+  background: yellow;
   transition:all .3s;
+  width:4.3rem;
+  font-weight: 700;
+  border:2px solid yellow;
+  height: 2.4rem;
+  font-size: 1rem;
+  -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 }
 .add:hover{
   cursor:pointer;
-  transform: translateY(-2px);
+  background: green;
+  transform: translateY(-1px);
+  color:white;
+  border:2px solid green;
 }
+
 .remove{
-  color: red;
-  padding: 10px;
-  background: white;
-  border-radius: 3px;
+  color: black;
+  background: yellow;
   transition:all .3s;
+  width:4.3rem;
+  font-weight: 700;
+  border:2px solid yellow;
+  height: 2.4rem;
+  font-size: 1rem;
+  -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 }
 .remove:hover{
   cursor:pointer;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  background-color: red;
+  color:white;
+  -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+  border:2px solid red;
 }
 .disable{
-  color: gray;
-  padding: 10px;
-  background: white;
-  border-radius: 3px;
+  color: black;
+  background: rgb(163, 163, 163);
   transition:all .3s;
+  width:4.3rem;
+  font-weight: 700;
+  border:2px solid rgb(163, 163, 163);
+  height: 2.4rem;
+  font-size: 1rem;
+  -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 }

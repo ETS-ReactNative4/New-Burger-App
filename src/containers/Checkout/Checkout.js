@@ -4,9 +4,9 @@ import Loader from '../../components/UI/Loader/Loader';
 import ContactData from '../../components/ContactData/ContactData';
 import {connect} from 'react-redux';
 import initalState from '../../store/Actions/InitialState';
-import {Link} from 'react-router-dom';
 import pic from '../../pic/1.jpeg';
 import classes from './Checkout.module.scss';
+import {Link} from 'react-router-dom';
 class Checkout extends Component{
   state={
     loading:false,
@@ -57,8 +57,8 @@ class Checkout extends Component{
       if(!this.state.loading){
         return(
           <div style={{marginTop:'-1.4rem',textAlign:'center'}} >
-            <Link to="/"><h2>Logo</h2></Link>
-            <h1 style={{textAlign:'center',paddingTop:'2rem'}}>We hope it tastes well!!</h1>
+            <Link to="/"><button className={classes.button}>Go Back</button></Link>
+            <h1 style={{textAlign:'center',paddingTop:'2rem',color:'rgb(70, 12, 124)'}}>We hope it tastes well!!</h1>
             <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
             <ContactData contactInfo={this.contactHandler} buy={this.buy}  error={(err)=>this.setState({error:err})}/>
             

@@ -1,6 +1,6 @@
 .background{
   position: fixed;
-  background-image:linear-gradient(to top,black,grey);
+  background-color: black;
   height: 100vh;
   width: 100%;
   transform: translateY(-100%);
@@ -51,6 +51,7 @@
   font-size:1.3rem;
   letter-spacing: 5px;
   transition: all .2s;
+  font-weight: 700;
 }
 
 .li a:hover{

@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import classes from './ContactData.module.scss'
 class ContactData extends Component{
 
   state={
@@ -55,28 +56,43 @@ class ContactData extends Component{
   }
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-            <input 
-              placeholder="Name"
-              type="text"
-              onChange={this.nameChangeHandler}
-            />
-            <input 
-              placeholder="Email"
-              type="text"
-              onChange={this.emailChangeHandler}
-            />
-            <input 
-              placeholder="Mobile"
-              type="text"
-              onChange={this.mobileChangeHandler}  
-            />
-            <textarea 
+      <form onSubmit={this.handleSubmit} className={classes.form}>
+            <div>    
+                <input 
+                  placeholder="Name"
+                  type="text"
+                  onChange={this.nameChangeHandler}
+                />
+                <label>Name</label>
+            </div>
+
+            <div>    
+                <input 
+                  placeholder="Email"
+                  type="text"
+                  onChange={this.emailChangeHandler}
+                />
+                <label>Email</label>
+            </div>
+
+            <div>    
+              <input 
+                placeholder="Mobile"
+                type="text"
+                onChange={this.mobileChangeHandler}  
+              />
+              <label>Mobile</label>
+            </div>
+
+            <div>    
+             <textarea 
               placeholder="Address"
               type="text"
               onChange={this.addressChangeHandler}     
             />
-              <input type="submit" value="Order"/>
+            <label>Address</label>
+            </div>
+            <input type="submit" value="Order"/>
           </form>
     )
     

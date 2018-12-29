@@ -1,7 +1,19 @@
-.background{
-  background-image: url('../../pic/1.jpeg');
-  background-size:cover;
- 
+.container{
+  padding-top:2rem;
+}
+.ul{
+  position: absolute;
+  top:4rem;
+  left:50%;
+  transform: translateX(-50%);
+  counter-reset:counter-name;
+}
+
+.loadingContainer{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
 }
 .button{
   padding:.8rem;
