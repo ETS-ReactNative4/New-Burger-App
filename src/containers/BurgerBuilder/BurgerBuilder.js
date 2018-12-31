@@ -68,7 +68,8 @@ import {Link} from 'react-router-dom';
 
     return(
       <Aux>
-        <Link to="/orders"><button className={classes.button}>Orders</button></Link>
+        <Link to="orders"><button className={classes.button}>Orders</button></Link>
+        <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>
@@ -84,8 +85,8 @@ import {Link} from 'react-router-dom';
 }
 const mapStateToProps=state=>{
   return{
-    ingredients:state.ingredients,
-    totalPrice:state.totalPrice
+    ingredients:state.burgerReducer.ingredients,
+    totalPrice:state.burgerReducer.totalPrice
   }
 }
 export default connect(mapStateToProps)(BurgerBuilder);

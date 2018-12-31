@@ -16,7 +16,7 @@ const initialState={
 
 
 
-const Reducer=(state=initialState,action)=>{
+const burgerReducer=(state=initialState,action)=>{
   switch(action.type){
     case 'ADD_ITEM':{
 
@@ -47,4 +47,4 @@ const Reducer=(state=initialState,action)=>{
   }
 }
 
-export default Reducer;
+export default burgerReducer;

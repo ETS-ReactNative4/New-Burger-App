@@ -32,7 +32,10 @@ class Checkout extends Component{
       totalPrice:this.state.totalPrice,
       CustomerInfo:this.state.contactInfo
     };
-    fetch('https://testing-bc79f.firebaseio.com/orders.json',{
+    if(!!this.props.id){
+      let id=this.props.id;
+    }
+    fetch(`https://testing-bc79f.firebaseio.com/orders/${this.props.id}.json`,{
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -81,8 +84,9 @@ class Checkout extends Component{
 }
 const mapStateToProps=state=>{
   return{
-    ingredients:state.ingredients,
-    totalPrice:state.totalPrice
+    ingredients:state.burgerReducer.ingredients,
+    totalPrice:state.burgerReducer.totalPrice,
+    id:state.authReducer.id
   }
 }
 

@@ -3,6 +3,7 @@ import classes from './TotalOrders.module.scss';
 import Loader from '../../components/UI/Loader/Loader';
 import Order from './Order/Order';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class TotalOrders extends Component{
   state={
@@ -11,7 +12,7 @@ class TotalOrders extends Component{
   }
   componentDidMount(){
     this.setState({loading:true});
-    fetch('https://testing-bc79f.firebaseio.com/orders.json')
+    fetch(`https://testing-bc79f.firebaseio.com/orders/${this.props.id}.json`)
       .then(res=>res.json())
       .then(data=>{
         let containerOrders=[];
@@ -46,4 +47,9 @@ class TotalOrders extends Component{
     
   }
 }
-export default TotalOrders;
+const mapStateToProps=state=>{
+  return{
+    id:state.authReducer.id
+  }
+}
+export default connect(mapStateToProps)(TotalOrders);

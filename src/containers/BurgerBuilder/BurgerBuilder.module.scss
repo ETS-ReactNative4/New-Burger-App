@@ -57,3 +57,24 @@
   color:black;
   transform: translateY(-2px);
 }
+
+.signupButton{
+  padding:.8rem;
+  background: #2475B0;
+  text-transform: uppercase;
+  color:white;
+  font-weight: 700;
+  -webkit-clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+  position: absolute;
+  top:1rem;
+  left:7rem;
+  border: transparent;
+  cursor: pointer;
+  transition: all .3s;
+}
+.signupButton:hover{
+  background: #6A89CC;
+  color:white;
+  transform: translateY(-2px);
+}
