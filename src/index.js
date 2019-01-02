@@ -9,6 +9,22 @@ import { Provider } from 'react-redux'
 import burgerReducer from './store/burgerReducer';
 import thunk from 'redux-thunk';
 import authReducer from './store/authReducer';
+import {firebase} from './firebase/firebase';
+import {signIn} from './store/Actions/auth';
+import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+
+import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
+import { library } from '@fortawesome/fontawesome-svg-core';
+library.add(
+  faMoneyBill,
+  faCode,
+  faHighlighter,
+  faEnvelope,
+  faFacebook,
+  faGoogle,
+  faThumbsUp
+  // more icons go here
+);
 
 const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,11 +36,25 @@ const app= <Provider store={store}>
                 <App />
               </BrowserRouter>
             </Provider>
+  firebase.auth().onAuthStateChanged(user=> {  
+    if (user) {    
+      if(store.getState().authReducer.sign_In_With_Email){
+        store.dispatch(signIn(user.uid));
+        store.dispatch({type:'SIGNUP_LINK_FALSE'})
+   
+      }     
+    }else{
+   
+      store.dispatch({type:'SIGNUP_LINK_TRUE'})
+    }
+  });
 
 ReactDOM.render(app, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 
 serviceWorker.unregister();
+export default store;

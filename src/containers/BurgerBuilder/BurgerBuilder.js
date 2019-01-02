@@ -15,9 +15,10 @@ import {Link} from 'react-router-dom';
     hamBurger:true,
     checkout:false,
     loading:false,
-    Message:false
+    Message:false,
+    signInMessage:false
    }
-
+   
    purChaseHandler=()=>{   
      this.setState({purChaseBurger:true});   
    }
@@ -25,31 +26,35 @@ import {Link} from 'react-router-dom';
     this.setState({purChaseBurger:false});
    }
    buy=()=>{
-     if(this.props.totalPrice!==10){
-      this.props.history.push({pathname:'/checkout',state:{
-        ingredients:this.props.ingredients,
-        totalPrice:this.props.totalPrice
-        }}
-      );
-
-     }else{  
-      this.setState({Message:true});
-      this.setState({loading:true});
-      setTimeout(()=>{
-        this.setState({loading:false,Message:false});
-      },2000)
- 
+     if(!!this.props.id){
+      if(this.props.totalPrice!==10){
+        this.props.history.push({pathname:'/checkout',state:{
+          ingredients:this.props.ingredients,
+          totalPrice:this.props.totalPrice
+          }}
+        );
+  
+       }else{  
+        this.setState({Message:true});
+        this.setState({loading:true});
+        setTimeout(()=>{
+          this.setState({loading:false,Message:false});
+        },2000)
+       }
+     }else{
+      this.props.history.push('/signin');
      }
-     
+  
    }
    hamBurgerController=()=>{
     this.setState((prevState)=>{
       return {hamBurger:!prevState.hamBurger}
     });
    }
-   
+
+
   render(){
-    console.log(this.props);
+   
     let orderSummary;
     if(this.state.loading){
       if(this.state.Message){
@@ -68,8 +73,18 @@ import {Link} from 'react-router-dom';
 
     return(
       <Aux>
-        <Link to="orders"><button className={classes.button}>Orders</button></Link>
-        <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
+        
+        {this.props.check_signup_link
+          ?
+            <Aux>
+              <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
+              <Link to="signin"><button className={classes.signinButton}>Sign In</button></Link>
+            </Aux>    
+          :
+            <Link to="orders"><button className={classes.button}>Orders</button></Link> 
+          }
+        
+        
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>
@@ -86,7 +101,9 @@ import {Link} from 'react-router-dom';
 const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
-    totalPrice:state.burgerReducer.totalPrice
+    totalPrice:state.burgerReducer.totalPrice,
+    check_signup_link:state.authReducer.check_signup_link,
+    id:state.authReducer.id
   }
 }
 export default connect(mapStateToProps)(BurgerBuilder);

@@ -76,5 +76,26 @@
 .signupButton:hover{
   background: #6A89CC;
   color:white;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+}
+
+.signinButton{
+  padding:.8rem;
+  background:salmon;
+  text-transform: uppercase;
+  color:white;
+  font-weight: 700;
+  -webkit-clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+  position: absolute;
+  top:1rem;
+  left:13rem;
+  border: transparent;
+  cursor: pointer;
+  transition: all .3s;
+}
+.signinButton:hover{
+  background: red;
+  color:white;
+  transform: translateY(-1px);
 }

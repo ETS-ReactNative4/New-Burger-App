@@ -1,0 +1,18 @@
+.logout{
+  background: transparent;
+  border: 1px solid salmon;
+  position: absolute;
+  top:2rem;
+  right:9rem;
+  width:7rem;
+  padding: .5rem;
+  font-size: 1.2rem;
+  transition: all .1s;
+  border-radius:5px;
+  cursor: pointer;
+  color:salmon;
+}
+.logout:hover{
+  background: salmon;
+  color: white;
+}

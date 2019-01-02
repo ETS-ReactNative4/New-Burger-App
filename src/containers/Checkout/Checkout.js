@@ -7,6 +7,7 @@ import initalState from '../../store/Actions/InitialState';
 import pic from '../../pic/1.jpeg';
 import classes from './Checkout.module.scss';
 import {Link} from 'react-router-dom';
+import {database} from '../../firebase/firebase';
 class Checkout extends Component{
   state={
     loading:false,
@@ -35,20 +36,22 @@ class Checkout extends Component{
     if(!!this.props.id){
       let id=this.props.id;
     }
-    fetch(`https://testing-bc79f.firebaseio.com/orders/${this.props.id}.json`,{
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data),
-    }).then(res=>{this.setState({loading:false,message:true})})
+    database.ref(`orders/${this.props.id}`).push(data).then(res=>{this.setState({loading:false,message:true})})
     .catch(err=>{this.setState({loading:false})})
+    // fetch(`https://testing-bc79f.firebaseio.com/orders/${this.props.id}.json`,{
+    //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+    //     mode: "cors", // no-cors, cors, *same-origin
+    //     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    //     credentials: "same-origin", // include, *same-origin, omit
+    //     headers: {
+    //         "Content-Type": "application/json; charset=utf-8",
+    //         // "Content-Type": "application/x-www-form-urlencoded",
+    //     },
+    //     redirect: "follow", // manual, *follow, error
+    //     referrer: "no-referrer", // no-referrer, *client
+    //     body: JSON.stringify(data),
+    // }).then(res=>{this.setState({loading:false,message:true})})
+    // .catch(err=>{this.setState({loading:false})})
 
     setTimeout(()=>{
       this.props.history.goBack();

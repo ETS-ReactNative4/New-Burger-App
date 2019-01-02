@@ -14,6 +14,9 @@ class  HamburgerIcon extends Component{
       return {hamBurger:!prevState.hamBurger}
     });
    }
+   clickedItem=()=>{
+     this.setState({hamBurger:false})
+   }
 
   render(){
     let itemName=[];
@@ -30,7 +33,7 @@ class  HamburgerIcon extends Component{
           <span >&nbsp;</span>
           <span >&nbsp;</span>
         </div>
-        <Navigation show={this.state.hamBurger}/>
+        <Navigation show={this.state.hamBurger} clickedItem={this.clickedItem}/>
       </Aux>
     )
   }

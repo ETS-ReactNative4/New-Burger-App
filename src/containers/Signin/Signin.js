@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import classes from './Signup.module.scss';
+import classes from './Signin.module.scss';
 import {firebase,googleProvider,fbProvider,database} from '../../firebase/firebase';
 import {connect} from 'react-redux';
 import {signIn,signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-class Signup extends Component {
+
+class Signin extends Component {
   state={
     inputShow:false,
     email:'',
-    password:''
+    password:false
   }
   emailHandler=(e)=>{
     let currentValue=this.state.inputShow;
@@ -19,26 +20,38 @@ class Signup extends Component {
   googleSignInHandler=()=>{
     firebase.auth().signInWithPopup(googleProvider).then(()=>{
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
+      this.props.history.push("/");
     });;
   }
   fbSignInHandler=()=>{
     firebase.auth().signInWithPopup(fbProvider).then(()=>{
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
+      this.props.history.push("/");
     });;
    
   }
   emailChangeHandler=(e)=>{
-    this.setState({email:e.target.value})
+    this.setState({email:e.target.value});
+    this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'})
   }
   passwordChangeHandler=(e)=>{
     this.setState({password:e.target.value})
   }
   emailAndPasswordHandler=(email,password)=>{
-    console.log(email,password);
-    firebase.auth().createUserWithEmailAndPassword(email,password).then(()=>{
+    firebase.auth().signInWithEmailAndPassword(email, password).
+    then(user=>{
+      console.log('welcome');
+      this.props.history.push("/");
+    })
+    .
+    catch(error=>{
+      // Handle Errors here.
+      console.log('you r not in the list!!');
       this.props.dispatch(signOut()); 
       this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
-      this.props.history.push("/");
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
     });
   }
   render() {
@@ -61,7 +74,7 @@ class Signup extends Component {
             <span className={classes.textFacebook}>Log In With Facebook</span>
         </button>
         <h3 className={classes.or}>Or</h3>
-        <button onClick={this.emailHandler} className={classes.emailHandler}>Sign Up with Email</button>
+        <button onClick={this.emailHandler} className={classes.emailHandler}>Sign In with Email</button>
           {
             this.state.inputShow ?
               <div>
@@ -81,7 +94,7 @@ class Signup extends Component {
                   /> 
                   <label>Password</label> 
                 </div>
-                <button onClick={()=>this.emailAndPasswordHandler(this.state.email,this.state.password)} className={classes.signUpBtn}>Submit</button>
+                <button onClick={()=>this.emailAndPasswordHandler(this.state.email,this.state.password)} className={classes.signInBtn}>Sign In</button>
               </div>    
               : null
           }
@@ -91,4 +104,4 @@ class Signup extends Component {
   }
 }
 
-export default connect()(Signup);
+export default connect()(Signin);
