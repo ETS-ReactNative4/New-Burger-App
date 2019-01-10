@@ -17,7 +17,7 @@ const BurgerIngredients=(props)=>{
     <div className={classes.BurgerContainer}>
       <div className={classes.Burger}>
         <BurgerIngredient  type='BreadTop'/>
-          {props.totalPrice !==10 ? container.map((item,index)=><BurgerIngredient key={index} type={item}/>):<p style={{textAlign:'center',margin: 0}}>Add your items</p> }
+          {props.totalPrice !==10 ? container.map((item,index)=><BurgerIngredient key={index} type={item}/>):<p style={{textAlign:'center',margin: 0,fontWeight:'700'}}>Add your items</p> }
       
         <BurgerIngredient  type='BreadBottom'/>
       </div>

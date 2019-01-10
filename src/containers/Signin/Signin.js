@@ -4,13 +4,17 @@ import {firebase,googleProvider,fbProvider,database} from '../../firebase/fireba
 import {connect} from 'react-redux';
 import {signIn,signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Aux from '../../HOC/helper';
+import Loader from '../../components/UI/Loader/Loader';
 
 class Signin extends Component {
   state={
     inputShow:false,
     email:'',
-    password:false
+    password:false,
+    err:false,
+    errMsg:'',
+    loading:false
   }
   emailHandler=(e)=>{
     let currentValue=this.state.inputShow;
@@ -18,13 +22,17 @@ class Signin extends Component {
     e.preventDefault();
   }
   googleSignInHandler=()=>{
+    this.setState({loading:true})
     firebase.auth().signInWithPopup(googleProvider).then(()=>{
+      this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
       this.props.history.push("/");
     });;
   }
   fbSignInHandler=()=>{
+    this.setState({loading:true})
     firebase.auth().signInWithPopup(fbProvider).then(()=>{
+      this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
       this.props.history.push("/");
     });;
@@ -38,15 +46,23 @@ class Signin extends Component {
     this.setState({password:e.target.value})
   }
   emailAndPasswordHandler=(email,password)=>{
+    this.setState({err:false}) 
+    this.setState({loading:true})
     firebase.auth().signInWithEmailAndPassword(email, password).
     then(user=>{
+      this.setState({err:false})
       console.log('welcome');
       this.props.history.push("/");
+      this.setState({loading:false}) 
+     
     })
     .
     catch(error=>{
       // Handle Errors here.
-      console.log('you r not in the list!!');
+      this.setState({err:true});
+      this.setState({loading:false})
+      console.log(error)
+      this.setState({errMsg:error.message});
       this.props.dispatch(signOut()); 
       this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
       var errorCode = error.code;
@@ -57,8 +73,19 @@ class Signin extends Component {
   render() {
     let fbBtn=[classes.button,classes.facebook];
     let googleBtn=[classes.button,classes.google];
+    let loading=this.state.loading;
     return (
-      <div className={classes.container}>
+      <Aux>
+      { loading
+          ?
+          <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}><Loader/></div>
+        :
+      <div className={classes.container} style={
+        this.state.inputShow?{
+        height:'28rem'
+      }:{
+        height:'15rem'
+      }}>
         <button className={googleBtn.join(' ')} onClick={this.googleSignInHandler}>
           <FontAwesomeIcon
               icon={['fab','google']}
@@ -100,6 +127,10 @@ class Signin extends Component {
           }
 
       </div>
+    }
+          
+          <h3 className={classes.errMsg}>{this.state.err?this.state.errMsg:null}</h3>
+      </Aux>
     )
   }
 }

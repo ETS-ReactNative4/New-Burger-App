@@ -11,7 +11,8 @@ const initialState={
           'Cheese':0,
           'Chicken':0 
       },
-      totalPrice:10
+      totalPrice:10,
+      orders:[]
   }
 
 
@@ -40,6 +41,12 @@ const burgerReducer=(state=initialState,action)=>{
     case 'INITIAL_STATE':{
       return{
         ...initialState
+      }
+    }
+    case 'GET_ALL_ORDERS':{
+      return{
+        ...initialState,
+        orders:action.items
       }
     }
     default:return state;

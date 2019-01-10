@@ -4,12 +4,16 @@ import {firebase,googleProvider,fbProvider,database} from '../../firebase/fireba
 import {connect} from 'react-redux';
 import {signIn,signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Aux from '../../HOC/helper';
+import Loader from '../../components/UI/Loader/Loader';
 class Signup extends Component {
   state={
     inputShow:false,
     email:'',
-    password:''
+    password:'',
+    err:false,
+    errMsg:'',
+    loading:false
   }
   emailHandler=(e)=>{
     let currentValue=this.state.inputShow;
@@ -17,13 +21,21 @@ class Signup extends Component {
     e.preventDefault();
   }
   googleSignInHandler=()=>{
+    this.setState({loading:true})
     firebase.auth().signInWithPopup(googleProvider).then(()=>{
+      this.setState({loading:false})
+      this.setState({err:false})
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
+      this.props.history.push("/");
     });;
   }
   fbSignInHandler=()=>{
+    this.setState({loading:true})
     firebase.auth().signInWithPopup(fbProvider).then(()=>{
+      this.setState({loading:false})
+      this.setState({err:false})
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
+      this.props.history.push("/");
     });;
    
   }
@@ -34,59 +46,83 @@ class Signup extends Component {
     this.setState({password:e.target.value})
   }
   emailAndPasswordHandler=(email,password)=>{
-    console.log(email,password);
+    this.setState({err:false})
+    this.setState({loading:true})
     firebase.auth().createUserWithEmailAndPassword(email,password).then(()=>{
       this.props.dispatch(signOut()); 
+      this.setState({err:false})
       this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
+      this.props.history.push("/"); 
+      this.setState({loading:false});
       this.props.history.push("/");
+    })
+    .catch(err=>{
+      this.setState({err:true});
+      this.setState({loading:false})
+      console.log(err)
+      this.setState({errMsg:err.message});
     });
   }
   render() {
     let fbBtn=[classes.button,classes.facebook];
     let googleBtn=[classes.button,classes.google];
+    let loading=this.state.loading;
     return (
-      <div className={classes.container}>
-        <button className={googleBtn.join(' ')} onClick={this.googleSignInHandler}>
-          <FontAwesomeIcon
-              icon={['fab','google']}
-              className={classes.google_icon}
-            />
-            <span className={classes.textGoogle}>Log In With Google</span>
-        </button>
-        <button className={fbBtn.join(' ')} onClick={this.fbSignInHandler}>
-          <FontAwesomeIcon
-              icon={['fab','facebook']}
-              className={classes.fb_icon}
-            />
-            <span className={classes.textFacebook}>Log In With Facebook</span>
-        </button>
-        <h3 className={classes.or}>Or</h3>
-        <button onClick={this.emailHandler} className={classes.emailHandler}>Sign Up with Email</button>
-          {
-            this.state.inputShow ?
-              <div>
-                <div className={classes.inputContainer}>  
-                  <input 
-                    placeholder="Email"
-                    type="email"
-                    onChange={this.emailChangeHandler}
-                  />
-                   <label>Email</label>     
-                </div>
-                <div className={classes.inputContainer}>     
-                  <input 
-                    placeholder="Password"
-                    type="password"
-                    onChange={this.passwordChangeHandler}  
-                  /> 
-                  <label>Password</label> 
-                </div>
-                <button onClick={()=>this.emailAndPasswordHandler(this.state.email,this.state.password)} className={classes.signUpBtn}>Submit</button>
-              </div>    
-              : null
-          }
-
-      </div>
+      <Aux>
+        { loading
+            ?
+            <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}><Loader/></div>
+          :
+          <div className={classes.container} style={
+            this.state.inputShow?{
+            height:'29rem'
+          }:{
+            height:'15rem'
+          }}>
+            <button className={googleBtn.join(' ')} onClick={this.googleSignInHandler}>
+              <FontAwesomeIcon
+                  icon={['fab','google']}
+                  className={classes.google_icon}
+                />
+                <span className={classes.textGoogle}>Log In With Google</span>
+            </button>
+            <button className={fbBtn.join(' ')} onClick={this.fbSignInHandler}>
+              <FontAwesomeIcon
+                  icon={['fab','facebook']}
+                  className={classes.fb_icon}
+                />
+                <span className={classes.textFacebook}>Log In With Facebook</span>
+            </button>
+            <h3 className={classes.or}>Or</h3>
+            <button onClick={this.emailHandler} className={classes.emailHandler}>Sign Up with Email</button>
+              {
+                this.state.inputShow ?
+                  <div>
+                    <div className={classes.inputContainer}>  
+                      <input 
+                        placeholder="Email"
+                        type="email"
+                        onChange={this.emailChangeHandler}
+                      />
+                      <label>Email</label>     
+                    </div>
+                    <div className={classes.inputContainer}>     
+                      <input 
+                        placeholder="Password"
+                        type="password"
+                        onChange={this.passwordChangeHandler}  
+                      /> 
+                      <label>Password</label> 
+                    </div>
+                    <button onClick={()=>this.emailAndPasswordHandler(this.state.email,this.state.password)} className={classes.signUpBtn}>Submit</button>
+                  </div>    
+                  : null
+              }
+          </div>
+        }
+          
+          <h3 className={classes.errMsg}>{this.state.err?this.state.errMsg:null}</h3>
+      </Aux>
     )
   }
 }

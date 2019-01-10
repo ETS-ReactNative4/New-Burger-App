@@ -10,11 +10,11 @@
   color:white;
   margin-top:2rem;
   border:1px solid transparent;
-  transition: all .3s;
+  transition: all .1s;
 
 }
 .orderBtn:hover{
-  transform: translateY(-1.3px);
+  transform: translateY(-1.1px);
   cursor: pointer;
   background-image:linear-gradient(to right bottom ,rgba(0, 136, 0,.9),rgba(9, 68, 9,.9));
 }
@@ -38,7 +38,8 @@
   margin-right: 10px;
 }
 .button{
-  padding:.8rem;
+  padding:.5rem;
+  padding-right:.7rem;
   background: black;
   text-transform: uppercase;
   color:yellow;
@@ -50,7 +51,7 @@
   left:1rem;
   border: transparent;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .2s;
 }
 .button:hover{
   background: yellow;
@@ -59,43 +60,40 @@
 }
 
 .signupButton{
-  padding:.8rem;
-  background: #2475B0;
+  padding: .5rem;
+  background:#4f5d8a;;
   text-transform: uppercase;
   color:white;
-  font-weight: 700;
-  -webkit-clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
-  clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
   position: absolute;
   top:1rem;
   left:7rem;
   border: transparent;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .1s;
+  font-weight: 700;
+  border-radius: 2px;
 }
 .signupButton:hover{
-  background: #6A89CC;
   color:white;
-  transform: translateY(-1px);
+  background: #57699e;
 }
 
 .signinButton{
-  padding:.8rem;
-  background:salmon;
-  text-transform: uppercase;
-  color:white;
-  font-weight: 700;
-  -webkit-clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
-  clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0% 100%);
+  padding: .5rem;
   position: absolute;
   top:1rem;
-  left:13rem;
+  left:12.1rem;
   border: transparent;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .2s;
+  background: transparent;
+  border:1px solid #c9f658;
+  text-transform: uppercase;
+  border-radius: 2px;
+  font-weight: 700; 
+  color: #36622b;
 }
 .signinButton:hover{
-  background: red;
-  color:white;
-  transform: translateY(-1px);
+  background: #c9f658;
+  color: #36622b;
 }

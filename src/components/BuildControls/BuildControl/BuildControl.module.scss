@@ -19,7 +19,7 @@
   color:yellow;
 }
 .Salad{
-  transition:all .3s;
+  transition:all .1s;
   cursor: pointer;
   
 }
@@ -28,7 +28,7 @@
 }
 .Meat{
 
-  transition:all .3s;
+  transition:all .1s;
   cursor: pointer;
 }
 .Meat:hover{
@@ -36,7 +36,7 @@
 }
 .Chicken{
  
-  transition:all .3s;
+  transition:all .1s;
   cursor: pointer;
 }
 .Chicken:hover{
@@ -44,7 +44,7 @@
 }
 .Cheese{
  
-  transition:all .3s;
+  transition:all .1s;
   cursor: pointer;
 }
 .Cheese:hover{
@@ -53,7 +53,7 @@
 .add{
   color: black;
   background: yellow;
-  transition:all .3s;
+  transition:all .1s;
   width:4.3rem;
   font-weight: 700;
   border:2px solid yellow;
@@ -73,7 +73,7 @@ clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 .remove{
   color: black;
   background: yellow;
-  transition:all .3s;
+  transition:all .1s;
   width:4.3rem;
   font-weight: 700;
   border:2px solid yellow;
@@ -94,7 +94,7 @@ clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 .disable{
   color: black;
   background: rgb(163, 163, 163);
-  transition:all .3s;
+  transition:all .1s;
   width:4.3rem;
   font-weight: 700;
   border:2px solid rgb(163, 163, 163);

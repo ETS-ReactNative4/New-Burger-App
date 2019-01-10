@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/authReducer';
 import {firebase} from './firebase/firebase';
 import {signIn} from './store/Actions/auth';
+import {getAllOrders} from './store/Actions/get_All_Orders';
 import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
@@ -40,11 +41,13 @@ const app= <Provider store={store}>
     if (user) {    
       if(store.getState().authReducer.sign_In_With_Email){
         store.dispatch(signIn(user.uid));
+        localStorage.setItem('id',user.uid);
+        store.dispatch(getAllOrders(user.uid));
         store.dispatch({type:'SIGNUP_LINK_FALSE'})
    
       }     
     }else{
-   
+      localStorage.removeItem('id');
       store.dispatch({type:'SIGNUP_LINK_TRUE'})
     }
   });

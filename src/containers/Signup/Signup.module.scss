@@ -1,5 +1,4 @@
 .container{
-  padding-top:2rem;
   position: absolute;
   top:50%;
   left:50%;
@@ -11,19 +10,17 @@
   border-radius: 5px;
   box-shadow: 3px 3px 3px 0px rgba(117, 113, 113, 0.849),8px 8px 5px rgb(236, 230, 230);
 }
-
 .button{
   width:20rem;
-  display:grid;
-  grid-template-columns: auto 1fr;
-  grid-gap:2rem;
-  align-items: center;
-  justify-items: start;
+  display:block;
   border:none;
   transition: all .3s;
-  padding:.5rem;
+  padding:.8rem;
   border-radius:5px;
+  position: relative;
+  
 }
+
 .facebook{
   background: #3C5A99;
   color:white;
@@ -35,11 +32,17 @@
 }
 .fb_icon{
   font-size: 2rem;
-  margin-left:1rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
 }
 .google_icon{
   font-size: 2rem;
-  margin-left:1rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
 }
 .textFacebook{
   font-size: 1.2rem;
@@ -121,7 +124,7 @@
   margin-bottom: 0;
 }
 .inputContainer input:focus{
-  border:2px solid white;
+  border:2px solid rgb(255, 34, 34);
 }
 .inputContainer >label{
   position:relative;
@@ -153,4 +156,10 @@
 .signUpBtn:hover{
   background: rgb(14, 172, 14);
   cursor: pointer;
+}
+.errMsg{
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  color:red;
 }

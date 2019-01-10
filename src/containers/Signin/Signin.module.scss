@@ -1,28 +1,24 @@
+
 .container{
-  padding-top:2rem;
   position: absolute;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
   justify-content: center;
-  background: #fafafa;
-  height:28rem;
+  background: #e4e4e4;
   padding: 2rem;
   border-radius: 5px;
-  box-shadow: 3px 3px 0px #DAE0E2,8px 8px 5px #DAE0E2;
+  box-shadow: 3px 3px 0px #e7e7e7,8px 8px 5px #e7e7e7;
 }
-
 .button{
   width:20rem;
-  display:grid;
-  grid-template-columns: auto 1fr;
-  grid-gap:2rem;
-  align-items: center;
-  justify-items: start;
+  display:block;
   border:none;
   transition: all .3s;
-  padding:.5rem;
+  padding:.8rem;
   border-radius:5px;
+  position: relative;
+  
 }
 .facebook{
   background: #3C5A99;
@@ -35,22 +31,30 @@
 }
 .fb_icon{
   font-size: 2rem;
-  margin-left:1rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
 }
 .google_icon{
   font-size: 2rem;
-  margin-left:1rem;
+  left:1rem;
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
 }
 .textFacebook{
   font-size: 1.2rem;
   letter-spacing: .02cm;
+  margin-left: 2rem;
 }
 .textGoogle{
   font-size: 1.2rem;
   letter-spacing: .02cm;
+  margin-left: .5rem;
 }
 .button:hover{
-  background:#EAF0F1;
+  background:rgb(247, 247, 247);
   cursor: pointer;
 }
 .button:hover .fb_icon{
@@ -98,7 +102,7 @@
   margin-bottom: 2.7rem;
 }
 .emailHandler:hover{
-  background:rgb(205, 213, 214);
+  background:rgb(247, 247, 247);
   color:black;
   cursor: pointer;
 }
@@ -106,6 +110,7 @@
 .inputContainer{
   display: grid;
   justify-items: start;
+  
 }
 .inputContainer:first-child{
   margin-bottom:1.2rem;
@@ -151,4 +156,10 @@
 .signInBtn:hover{
   background: rgb(14, 172, 14);
   cursor: pointer;
+}
+.errMsg{
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  color:red;
 }

@@ -62,7 +62,7 @@ class Checkout extends Component{
       console.log(this.props);
       if(!this.state.loading){
         return(
-          <div style={{marginTop:'-1.4rem',textAlign:'center'}} >
+          <div style={{textAlign:'center'}} >
             <Link to="/"><button className={classes.button}>Go Back</button></Link>
             <h1 style={{textAlign:'center',paddingTop:'2rem',color:'rgb(70, 12, 124)'}}>We hope it tastes well!!</h1>
             <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
@@ -70,12 +70,12 @@ class Checkout extends Component{
             
             <br/>
             {this.state.message ?
-              <p  style={{background:'green',color:'white',display:'inline-block',padding:'5px'}}>
+              <p  style={{background:'#c9f658',color:'#36622b',display:'inline-block',padding:'10px'}}>
               Sir Your order is successfully sent.We will try to deliver the product as soon as Possible
             </p>
             : null
             }
-            {this.state.error && !this.state.message?<p style={{color:'red',fontSize:'1.4rem'}}>Please fill in all fields</p>:null}         
+            {this.state.error && !this.state.message?<p style={{background:'red',display:'inline-block',color:'white',fontSize:'1.4rem',padding:'10px',borderRadius:'5px'}}>Please fill in all fields</p>:null}         
             </div>     
         )
       }else{
