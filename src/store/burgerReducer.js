@@ -20,7 +20,6 @@ const initialState={
 const burgerReducer=(state=initialState,action)=>{
   switch(action.type){
     case 'ADD_ITEM':{
-
       return{
         ingredients:{
           ...state.ingredients,
@@ -40,7 +39,8 @@ const burgerReducer=(state=initialState,action)=>{
     }
     case 'INITIAL_STATE':{
       return{
-        ...initialState
+        ingredients:initialState.ingredients,
+        totalPrice:initialState.totalPrice
       }
     }
     case 'GET_ALL_ORDERS':{
@@ -48,6 +48,13 @@ const burgerReducer=(state=initialState,action)=>{
         ...initialState,
         orders:action.items
       }
+    }
+    case 'CANCEL_ORDER':{
+      return{
+        ...state,
+        orders:state.orders.filter(item=>item.id!==action.id)
+      }
+
     }
     default:return state;
 

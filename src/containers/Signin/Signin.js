@@ -6,6 +6,8 @@ import {signIn,signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Aux from '../../HOC/helper';
 import Loader from '../../components/UI/Loader/Loader';
+import {NavLink} from 'react-router-dom';
+
 
 class Signin extends Component {
   state={
@@ -26,7 +28,11 @@ class Signin extends Component {
     firebase.auth().signInWithPopup(googleProvider).then(()=>{
       this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      this.props.history.push("/");
+      if(this.props.totalPrice>10){
+        this.props.history.push('/checkout');
+       }else{
+        this.props.history.push("/");
+      }
     });;
   }
   fbSignInHandler=()=>{
@@ -34,7 +40,11 @@ class Signin extends Component {
     firebase.auth().signInWithPopup(fbProvider).then(()=>{
       this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      this.props.history.push("/");
+      if(this.props.totalPrice>10){
+        this.props.history.push('/checkout');
+       }else{
+        this.props.history.push("/");
+      }
     });;
    
   }
@@ -51,8 +61,11 @@ class Signin extends Component {
     firebase.auth().signInWithEmailAndPassword(email, password).
     then(user=>{
       this.setState({err:false})
-      console.log('welcome');
-      this.props.history.push("/");
+      if(this.props.totalPrice>10){
+        this.props.history.push('/checkout');
+       }else{
+        this.props.history.push("/");
+      }
       this.setState({loading:false}) 
      
     })
@@ -82,7 +95,7 @@ class Signin extends Component {
         :
       <div className={classes.container} style={
         this.state.inputShow?{
-        height:'28rem'
+        height:'30rem'
       }:{
         height:'15rem'
       }}>
@@ -102,6 +115,7 @@ class Signin extends Component {
         </button>
         <h3 className={classes.or}>Or</h3>
         <button onClick={this.emailHandler} className={classes.emailHandler}>Sign In with Email</button>
+        
           {
             this.state.inputShow ?
               <div>
@@ -125,7 +139,7 @@ class Signin extends Component {
               </div>    
               : null
           }
-
+          <p style={{display:'inlineBlock',position:'relative',bottom:'2rem',fontWeight:'600'}}>Need an Acount?<NavLink to="/signup" className={classes.signupLink}>Sign up now!</NavLink></p>
       </div>
     }
           
@@ -134,5 +148,12 @@ class Signin extends Component {
     )
   }
 }
-
-export default connect()(Signin);
+const mapStateToProps=state=>{
+  return{
+    ingredients:state.burgerReducer.ingredients,
+    totalPrice:state.burgerReducer.totalPrice,
+    check_signup_link:state.authReducer.check_signup_link,
+    id:state.authReducer.id
+  }
+}
+export default connect(mapStateToProps)(Signin);

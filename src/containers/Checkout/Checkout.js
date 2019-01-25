@@ -4,10 +4,12 @@ import Loader from '../../components/UI/Loader/Loader';
 import ContactData from '../../components/ContactData/ContactData';
 import {connect} from 'react-redux';
 import initalState from '../../store/Actions/InitialState';
+import {getAllOrders} from '../../store/Actions/get_All_Orders';
 import pic from '../../pic/1.jpeg';
 import classes from './Checkout.module.scss';
 import {Link} from 'react-router-dom';
 import {database} from '../../firebase/firebase';
+import moment from 'moment';
 class Checkout extends Component{
   state={
     loading:false,
@@ -18,9 +20,9 @@ class Checkout extends Component{
     error:false
   }
   componentWillMount(){
-    console.log(this.props.location);
-    this.setState({ ingredients:this.props.location.state.ingredients,
-                    totalPrice:this.props.location.state.totalPrice
+  
+    this.setState({ ingredients:this.props.ingredients,
+                    totalPrice:this.props.totalPrice
                   })
   }
   contactHandler=(data)=>{
@@ -31,13 +33,21 @@ class Checkout extends Component{
     const data={
       ingredients:this.state.ingredients,
       totalPrice:this.state.totalPrice,
-      CustomerInfo:this.state.contactInfo
+      CustomerInfo:this.state.contactInfo,
+      orderTime:moment().valueOf(),
+      cancelOrderTime:moment().add(4,'minutes').valueOf()
     };
+    console.log(moment().add(10,'minutes').valueOf())
     if(!!this.props.id){
       let id=this.props.id;
     }
-    database.ref(`orders/${this.props.id}`).push(data).then(res=>{this.setState({loading:false,message:true})})
+    database.ref(`orders/${this.props.id}`).push(data).then(res=>{
+      this.setState({loading:false,message:true});
+      this.props.dispatch(getAllOrders(this.props.id));
+      })
     .catch(err=>{this.setState({loading:false})})
+
+
     // fetch(`https://testing-bc79f.firebaseio.com/orders/${this.props.id}.json`,{
     //     method: "POST", // *GET, POST, PUT, DELETE, etc.
     //     mode: "cors", // no-cors, cors, *same-origin
@@ -55,11 +65,10 @@ class Checkout extends Component{
 
     setTimeout(()=>{
       this.props.history.goBack();
-      this.props.dispatch(initalState())
-    },4000)
+    },3000)
   }
   render(){
-      console.log(this.props);
+      
       if(!this.state.loading){
         return(
           <div style={{textAlign:'center'}} >

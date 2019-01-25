@@ -17,6 +17,9 @@ class TotalOrders extends Component{
                   ingredients={order.ingredients} 
                   CustomerInfo={order.CustomerInfo}
                   totalPrice={order.totalPrice}
+                  orderTime={order.orderTime}
+                  cancelOrderTime={order.cancelOrderTime}
+                  id={order.id}
             />
           )}
       </ul>

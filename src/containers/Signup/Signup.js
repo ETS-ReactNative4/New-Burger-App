@@ -6,6 +6,8 @@ import {signIn,signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Aux from '../../HOC/helper';
 import Loader from '../../components/UI/Loader/Loader';
+import {NavLink} from 'react-router-dom';
+
 class Signup extends Component {
   state={
     inputShow:false,
@@ -26,7 +28,11 @@ class Signup extends Component {
       this.setState({loading:false})
       this.setState({err:false})
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      this.props.history.push("/");
+      if(this.props.totalPrice>10){
+        this.props.history.push('/checkout');
+       }else{
+        this.props.history.push("/");
+      }
     });;
   }
   fbSignInHandler=()=>{
@@ -35,7 +41,11 @@ class Signup extends Component {
       this.setState({loading:false})
       this.setState({err:false})
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      this.props.history.push("/");
+      if(this.props.totalPrice>10){
+        this.props.history.push('/checkout');
+       }else{
+        this.props.history.push("/");
+      }
     });;
    
   }
@@ -75,7 +85,7 @@ class Signup extends Component {
           :
           <div className={classes.container} style={
             this.state.inputShow?{
-            height:'29rem'
+              height:'31rem'
           }:{
             height:'15rem'
           }}>
@@ -118,6 +128,7 @@ class Signup extends Component {
                   </div>    
                   : null
               }
+              <p style={{display:'inlineBlock',position:'relative',bottom:'2.5rem',fontWeight:'600',color:'white'}}>Already have an Acount?<NavLink to="/signin" className={classes.signinLink}>Log in</NavLink></p>
           </div>
         }
           

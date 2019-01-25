@@ -28,12 +28,7 @@ import {Link} from 'react-router-dom';
    buy=()=>{
      if(!!this.props.id){
       if(this.props.totalPrice!==10){
-        this.props.history.push({pathname:'/checkout',state:{
-          ingredients:this.props.ingredients,
-          totalPrice:this.props.totalPrice
-          }}
-        );
-  
+        this.props.history.push('/checkout');
        }else{  
         this.setState({Message:true});
         this.setState({loading:true});
