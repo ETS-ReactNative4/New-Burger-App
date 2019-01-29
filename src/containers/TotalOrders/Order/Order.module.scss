@@ -16,11 +16,11 @@
 .li{
   background: black;
   color:yellow;
-  width:35rem;
+  width:100%;
   list-style: none;
   display:grid;
-  grid-gap:1rem;
-  grid-template-columns:auto 1fr 1fr;
+  grid-gap:2rem;
+  grid-template-columns:auto auto 1fr;
   grid-template-rows: 1;
   padding-bottom:1rem;
   padding-right: 1rem;

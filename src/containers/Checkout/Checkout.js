@@ -35,7 +35,7 @@ class Checkout extends Component{
       totalPrice:this.state.totalPrice,
       CustomerInfo:this.state.contactInfo,
       orderTime:moment().valueOf(),
-      cancelOrderTime:moment().add(4,'minutes').valueOf()
+      cancelOrderTime:moment().add(10,'minutes').valueOf()
     };
     console.log(moment().add(10,'minutes').valueOf())
     if(!!this.props.id){

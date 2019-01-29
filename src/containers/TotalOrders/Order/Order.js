@@ -12,7 +12,6 @@ class Order extends Component {
     let UID=this.props.UID;
     let id=this.props.id;
     return(
-      
       <li className={classes.li}>
         <div style={{position:'relative',height:`${height}`}}>
           <h3>Chicken: {this.props.ingredients.Chicken}</h3>
