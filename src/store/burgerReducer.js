@@ -5,11 +5,11 @@ const prices={
   'Chicken':30
  }
 const initialState={
-        ingredients:{
-          'Salad':0,
-          'Meat':0,
-          'Cheese':0,
-          'Chicken':0 
+      ingredients:{
+        'Salad':0,
+        'Meat':0,
+        'Cheese':0,
+        'Chicken':0 
       },
       totalPrice:10,
       orders:[]
@@ -25,7 +25,8 @@ const burgerReducer=(state=initialState,action)=>{
           ...state.ingredients,
           [action.itemName]:state.ingredients[action.itemName] +1
         },
-        totalPrice:state.totalPrice+prices[action.itemName]
+        totalPrice:state.totalPrice+prices[action.itemName],
+        orders:state.orders
       }
     }
     case 'REMOVE_ITEM':{
@@ -34,13 +35,15 @@ const burgerReducer=(state=initialState,action)=>{
           ...state.ingredients,
           [action.itemName]:state.ingredients[action.itemName]!==0?state.ingredients[action.itemName] -1:false
         },
-        totalPrice:state.totalPrice-prices[action.itemName]
+        totalPrice:state.totalPrice-prices[action.itemName],
+        orders:state.orders
       }
     }
     case 'INITIAL_STATE':{
       return{
         ingredients:initialState.ingredients,
-        totalPrice:initialState.totalPrice
+        totalPrice:initialState.totalPrice,
+        orders:state.orders
       }
     }
     case 'GET_ALL_ORDERS':{

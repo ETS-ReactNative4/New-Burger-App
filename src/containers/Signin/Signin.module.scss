@@ -1,4 +1,46 @@
+.signinContainer{
+  position: fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+}
+.signin{
+  background:whitesmoke;
+  padding:40px 30px 0 30px;
+  margin-bottom: 1.5rem;
+}
+.register{
+  position: absolute;
+  background: #6d70c6;
+  color:white;
+  width:10rem;
+  height:2rem;
+  border: none;
+  top:2rem;
+  right:3rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.register:hover{
+  background: #7e80d4;
+}
+.loaderContainer{
+  position: fixed;
+  height:100vh;
+  z-index: 10;
+  top:0;
+  left:0;
+  width:100%;
+  background: #f4f9f4;
+}
 .container{
   position: absolute;
   top:50%;
@@ -75,6 +117,7 @@
   align-items: center;
   grid-gap:.7rem;
   color:black;
+  padding:.7rem;
 }
 .or::before{
   content: "";
@@ -151,8 +194,9 @@
   font-size: 1rem;
   color:white;
   margin-bottom: 2rem;
-  width:7rem;
+  width:100%;
 }
+
 .signInBtn:hover{
   background: rgb(14, 172, 14);
   cursor: pointer;

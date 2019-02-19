@@ -3,14 +3,50 @@ import classes from './Order.module.scss';
 import moment from 'moment';
 import cancelOrder from '../../../store/Actions/cancel_order';
 import {connect} from 'react-redux';
+
 class Order extends Component {
 
   render(){
-    console.log(this.props)
     let height;
     this.props.cancelOrderTime>moment().valueOf()?height='20rem':height='inherit';
     let UID=this.props.UID;
-    let id=this.props.id;
+    let id=this.props.id;  
+    // if(this.props.cancelOrderTime>moment().valueOf()){
+    //   function convertSecond(time){
+    //     let hourToSecond=Number(time.toString().split(':')[0])*60*60;
+    //     let minuteToSecond=Number(time.toString().split(':')[1])*60;
+    //     let second=Number(time.toString().split(':')[2]);
+      
+    //     let totalSecond=hourToSecond+minuteToSecond+second;
+    //     return totalSecond;
+    //   }
+      
+    //   var startTime=moment().format('hh:mm:ss');
+     
+    //   var endTime = moment(this.props.cancelOrderTime).format('hh:mm:ss');
+      
+    //   const start=convertSecond(startTime);
+    //   const end=convertSecond(endTime);
+      
+    //   function count(time){
+    //     let convertSeconds=time*60;
+    //     let repeat=setInterval(()=>{
+    //     convertSeconds--;
+    //     let min=Math.floor(convertSeconds/60);
+    //     let second=convertSeconds%60;
+    //     if(min==0 & second==0){
+    //       clearInterval(repeat)
+    //     } 
+    //     console.log({min,second})
+    //     return{min,second}
+    //     },1000)
+    //   }
+    //   if(end>start){
+    //     count((end-start)/60);
+    //   }
+    // }
+ 
+   
     return(
       <li className={classes.li}>
         <div style={{position:'relative',height:`${height}`}}>
@@ -21,12 +57,15 @@ class Order extends Component {
           <h2 style={{color:'white'}}>Total Price: {this.props.totalPrice}</h2>
           {this.props.cancelOrderTime>moment().valueOf()?
           <div style={{position:'absolute',padding:'0px',marginTop:'2rem',color:'red',bottom:'.2rem'}}>
-          <h3 style={{display:'inlineBlock',background:'red',color:'white',fontWeight:'300'}}>
+         
+          <h3 style={{display:'inlineBlock',background:'red',color:'white',fontWeight:'400',padding:'1px 5px'}}>
           You can cancel your order before
-            {
+          
+           <span style={{fontWeight:700}}> {
                 moment(this.props.cancelOrderTime)
-                .format('hh:mm:ss')
+                .format('LTS')
             }
+            </span>
           </h3>
           <button className={classes.cancelBtn}
           onClick={()=>this.props.dispatch(cancelOrder(UID,id))}>Cancel Order</button>
@@ -48,43 +87,45 @@ class Order extends Component {
 }
 const mapStateToProps=state=>{
   return{
-    UID:state.authReducer.id
+    UID:state.authReducer.id,
+    orders:state.burgerReducer.orders
   }
 }
 export default connect(mapStateToProps)(Order);
 // const Order=(props)=>{
-//   function convertSecond(time){
-//     let hourToSecond=Number(time.toString().split(':')[0])*60*60;
-//     let minuteToSecond=Number(time.toString().split(':')[1])*60;
-//     let second=Number(time.toString().split(':')[2]);
+  // function convertSecond(time){
+  //   let hourToSecond=Number(time.toString().split(':')[0])*60*60;
+  //   let minuteToSecond=Number(time.toString().split(':')[1])*60;
+  //   let second=Number(time.toString().split(':')[2]);
   
-//     let totalSecond=hourToSecond+minuteToSecond+second;
-//     return totalSecond;
-//   }
+  //   let totalSecond=hourToSecond+minuteToSecond+second;
+  //   return totalSecond;
+  // }
   
-//   var startTime=moment(props.orderTime).format('hh:mm:ss');
-//   const timetovalue=moment(props.orderTime).valueOf();
-//   var endTime = moment(timetovalue)
-//       .add(5, 'minutes')
-//       .format('hh:mm:ss');
+  // var startTime=moment().format('hh:mm:ss');
+ 
+  // var endTime = moment(1548776628375).format('hh:mm:ss');
   
-//   const start=convertSecond(startTime);
-//   const end=convertSecond(endTime);
+  // const start=convertSecond(startTime);
+  // const end=convertSecond(endTime);
   
-//   function count(time){
-//     let convertSeconds=time*60;
-//     let repeat=setInterval(()=>{
-//     convertSeconds--;
-//     let min=Math.floor(convertSeconds/60);
-//     let second=convertSeconds%60;
-//     if(min==0 & second==0){
-//       clearInterval(repeat)
-//     }
-//     console.log({min,second});
-//     return{min,second}
-//     },1000)
-//   }
-//   let c=count((end-start)/60);
+  // function count(time){
+  //   let convertSeconds=time*60;
+  //   let repeat=setInterval(()=>{
+  //   convertSeconds--;
+  //   let min=Math.floor(convertSeconds/60);
+  //   let second=convertSeconds%60;
+  //   if(min==0 & second==0){
+  //     clearInterval(repeat)
+  //   }
+  //   console.log({min,second});
+  //   return{min,second}
+  //   },1000)
+  // }
+  // if(end>start){
+  //   count((end-start)/60);
+  // }
+ 
 
 
 //   return(
@@ -109,5 +150,36 @@ export default connect(mapStateToProps)(Order);
 
 //   )
 // }
+// function convertSecond(time){
+//   let hourToSecond=Number(time.toString().split(':')[0])*60*60;
+//   let minuteToSecond=Number(time.toString().split(':')[1])*60;
+//   let second=Number(time.toString().split(':')[2]);
 
+//   let totalSecond=hourToSecond+minuteToSecond+second;
+//   return totalSecond;
+// }
+
+// var startTime=moment().format('hh:mm:ss');
+
+// var endTime = moment(1548776628375).format('hh:mm:ss');
+
+// const start=convertSecond(startTime);
+// const end=convertSecond(endTime);
+
+// function count(time){
+//   let convertSeconds=time*60;
+//   let repeat=setInterval(()=>{
+//   convertSeconds--;
+//   let min=Math.floor(convertSeconds/60);
+//   let second=convertSeconds%60;
+//   if(min==0 & second==0){
+//     clearInterval(repeat)
+//   }
+//   console.log({min,second});
+//   return{min,second}
+//   },1000)
+// }
+// if(end>start){
+//   count((end-start)/60);
+// }
 

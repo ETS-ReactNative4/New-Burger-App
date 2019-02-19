@@ -68,7 +68,7 @@ import {Link} from 'react-router-dom';
 
     return(
       <Aux>
-        
+{/*         
         {this.props.check_signup_link
           ?
             <Aux>
@@ -77,8 +77,8 @@ import {Link} from 'react-router-dom';
             </Aux>    
           :
             <Link to="orders"><button className={classes.button}>Orders</button></Link> 
-          }
-        
+        }
+         */}
         
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>

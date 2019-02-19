@@ -1,5 +1,7 @@
 import React from 'react';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Dashboard from './containers/Dashboard/Dashboard';
+import SpecificBurger from './containers/SpecificBurger/SpecificBurger';
 import Checkout from './containers/Checkout/Checkout';
 import TotalOrders from './containers/TotalOrders/TotalOrders';
 import NotFound from './containers/NotFound/NotFound';
@@ -14,7 +16,9 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 const App=()=>( 
       <Layout >
         <Switch>
-          <Route path="/" exact component={BurgerBuilder}/>
+          <Route path="/" exact component={Dashboard}/>
+          <Route path='/burger/:id' component={SpecificBurger}/>
+          <Route path="/burgerBuilder" component={BurgerBuilder}/>
           <Route path="/checkout"  component={Checkout}/>
           <PrivateRoute path="/orders"  component={TotalOrders}/>
           <Route path="/signup"  component={Signup}/>

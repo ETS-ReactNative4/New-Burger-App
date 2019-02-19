@@ -95,9 +95,9 @@ class Signin extends Component {
         :
       <div className={classes.container} style={
         this.state.inputShow?{
-        height:'30rem'
+        height:'32.8rem'
       }:{
-        height:'15rem'
+        height:'16.8rem'
       }}>
         <button className={googleBtn.join(' ')} onClick={this.googleSignInHandler}>
           <FontAwesomeIcon

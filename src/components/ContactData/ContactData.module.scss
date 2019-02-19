@@ -13,9 +13,15 @@
   display: block;
   padding:1rem;
   border:2px solid black;
-  transition: all .3s;
+  
   font-size: 1.1rem;
 }
+select{
+  width:100%;
+  padding:1rem;
+  border:2px solid black;
+}
+
 .form>div input:focus{
   border:2px solid blueviolet;
 }
@@ -34,6 +40,7 @@
   opacity:1;
   transform: translateY(-390%);
 }
+
 .form>div input:not(:placeholder-shown){
   border:2px solid blueviolet;
 }
@@ -66,4 +73,22 @@
 }
 .form textarea:not(:placeholder-shown){
   border:2px solid blueviolet;
+}
+.form>div input.invalid{
+  border:2px solid red;
+}
+.form>div input.valid{
+  border:2px solid #a6cb12;
+}
+.form>div select.valid{
+  border:2px solid #a6cb12;
+}
+.form>div textarea.valid{
+  border:2px solid #a6cb12;
+}
+.form>div select.valid{
+  border:2px solid #a6cb12;
+}
+.form>div select.invalid{
+  border:2px solid red;
 }

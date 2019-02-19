@@ -85,9 +85,9 @@ class Signup extends Component {
           :
           <div className={classes.container} style={
             this.state.inputShow?{
-              height:'31rem'
+              height:'32.8rem'
           }:{
-            height:'15rem'
+            height:'17.8rem'
           }}>
             <button className={googleBtn.join(' ')} onClick={this.googleSignInHandler}>
               <FontAwesomeIcon
@@ -128,7 +128,7 @@ class Signup extends Component {
                   </div>    
                   : null
               }
-              <p style={{display:'inlineBlock',position:'relative',bottom:'2.5rem',fontWeight:'600',color:'white'}}>Already have an Acount?<NavLink to="/signin" className={classes.signinLink}>Log in</NavLink></p>
+              <p style={{display:'inlineBlock',position:'relative',bottom:'2rem',fontWeight:'600',color:'white'}}>Already have an Acount?<NavLink to="/signin" className={classes.signinLink}>Log in</NavLink></p>
           </div>
         }
           

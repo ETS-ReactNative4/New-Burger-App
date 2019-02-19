@@ -10,7 +10,7 @@ class TotalOrders extends Component{
   render(){
     let result; 
     result= <div className={classes.container}>
-      <Link to="/"><button className={classes.button}>Go Back</button></Link>
+      <Link to="/burgerBuilder"><button className={classes.button}>Go Back</button></Link>
       <ul className={classes.ul}>
           {this.props.orders.map((order,index)=>
             <Order key={index} 
@@ -32,7 +32,8 @@ class TotalOrders extends Component{
 const mapStateToProps=state=>{
   return{
     id:state.authReducer.id,
-    orders:state.burgerReducer.orders
+    orders:state.burgerReducer.orders,
+    
   }
 }
 export default connect(mapStateToProps)(TotalOrders);

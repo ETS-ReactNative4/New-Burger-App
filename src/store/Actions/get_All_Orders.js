@@ -11,7 +11,6 @@ export const getAllOrders=(id)=>{
     //   dispatch({type:'GET_ALL_ORDERS',items:containerOrders})
     // })
 
-
     fetch(`https://testing-bc79f.firebaseio.com/orders/${id}.json`)
     .then(res=>res.json())
     .then(data=>{
