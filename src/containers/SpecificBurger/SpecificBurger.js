@@ -20,6 +20,7 @@ class SpecificBurger extends Component {
   }
   addToCart=(name)=>{
     this.props.dispatch({type:'ADD ITEM TO CART',name:name})
+    this.props.dispatch({type:'ADDED TO CART ITEMS INFO'})
     this.setState({plusSign:true});
     setTimeout(()=>{
       this.setState({plusSign:false});
@@ -27,6 +28,7 @@ class SpecificBurger extends Component {
   }
   removeFromCart=(name)=>{
     this.props.dispatch({type:'REMOVE ITEM FROM CART',name:name})
+    this.props.dispatch({type:'ADDED TO CART ITEMS INFO'})
   }
   render() {
     let sign;
@@ -50,7 +52,6 @@ class SpecificBurger extends Component {
               transform="right-5 grow-2.5"
             />
             </button>
-            <button onClick={()=>this.removeFromCart(name)}>REMOVE</button>
           </div>
           <div className={classes.imgContainer}>
             <img src={url} className={classes.img}></img>

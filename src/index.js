@@ -14,7 +14,7 @@ import filterReducer from './store/filterReducer';
 import {firebase} from './firebase/firebase';
 import {signIn} from './store/Actions/auth';
 import {getAllOrders} from './store/Actions/get_All_Orders';
-import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck} from "@fortawesome/free-solid-svg-icons";
+import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck,faTimesCircle,faMinusCircle} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -28,7 +28,9 @@ library.add(
   faThumbsUp,
   faPlusCircle,
   faAngleDown,
-  faCheck
+  faCheck,
+  faTimesCircle,
+  faMinusCircle
   // more icons go here
 );
 
@@ -58,29 +60,44 @@ const app= <Provider store={store}>
   });
 
   //FETCH ALL BURGER FROM ADMIN
-
-  fetch(`https://admin-testing-burger-project.firebaseio.com/All Burgers.json`).
-  then(res=>res.json())
-  .then(data=>{
+  firebase.database().ref().child("allBurgers").on('value',(snap)=>{
     let allBurgers=[];
     let prices={};
-    for(let key in data){
+    for(let key in snap.val()){
       const info={
         id:key,
-        ...data[key]
+        ...snap.val()[key]
       }
       allBurgers.push(info);
-      prices[data[key].name]=data[key].price;
+      prices[snap.val()[key].name]=snap.val()[key].price;
     }
+    store.dispatch({type:'FETCH_BURGERS_FROM_ADMIN',allBurgers,prices})
 
-    return {allBurgers,prices};
-  }).then(({allBurgers,prices})=>{
-    if(!!allBurgers){
-      store.dispatch({type:'FETCH_BURGERS_FROM_ADMIN',allBurgers,prices})
-
-    }
- 
   })
+
+
+  // fetch(`https://admin-testing-burger-project.firebaseio.com/All Burgers.json`).
+  // then(res=>res.json())
+  // .then(data=>{
+  //   let allBurgers=[];
+  //   let prices={};
+  //   for(let key in data){
+  //     const info={
+  //       id:key,
+  //       ...data[key]
+  //     }
+  //     allBurgers.push(info);
+  //     prices[data[key].name]=data[key].price;
+  //   }
+
+  //   return {allBurgers,prices};
+  // }).then(({allBurgers,prices})=>{
+  //   if(!!allBurgers){
+  //     store.dispatch({type:'FETCH_BURGERS_FROM_ADMIN',allBurgers,prices})
+
+  //   }
+ 
+  // })
 ReactDOM.render(app, document.getElementById('root'));
 
 

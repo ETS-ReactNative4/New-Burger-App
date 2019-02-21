@@ -1,5 +1,5 @@
 
-const initialState={allBurgers:[],price:{},itemsInTheCart:{},totalItemsInTheCart:0};
+const initialState={allBurgers:[],price:{},itemsInTheCart:{},totalItemsInTheCart:0,addedToCartItmsInfo:[]};
 
 const adminReducer=(state=initialState,action)=>{
   switch(action.type){
@@ -37,7 +37,7 @@ const adminReducer=(state=initialState,action)=>{
       }
       const itemsInTheCart={
         ...state.itemsInTheCart,
-        [action.name]:numberOfItems
+        [action.name]:numberOfItems>0?numberOfItems:0
       };
       let totalItems=0;
       for(let itm in itemsInTheCart){
@@ -46,6 +46,35 @@ const adminReducer=(state=initialState,action)=>{
       return{
         ...state,
         itemsInTheCart:itemsInTheCart,
+        totalItemsInTheCart:totalItems?totalItems:0
+      }
+    }
+    case 'ADDED TO CART ITEMS INFO':{
+      let items=[];
+      for(let itm in state.itemsInTheCart){
+        items.push({name:itm,quantity:state.itemsInTheCart[itm],price:state.price[itm]*state.itemsInTheCart[itm]})
+      }
+      return{
+        ...state,
+        addedToCartItmsInfo:items
+      }
+    }
+    case 'DELETE ITEM FROM CART':{
+      let numberOfItems;  
+      numberOfItems=state.itemsInTheCart[action.name]*0;
+      
+      const itemsInTheCart={
+        ...state.itemsInTheCart,
+        [action.name]:numberOfItems>0?numberOfItems:0
+      };
+      let totalItems=0;
+      for(let itm in itemsInTheCart){
+        totalItems =totalItems+itemsInTheCart[itm];
+      }
+      return{
+        ...state,
+        addedToCartItmsInfo:state.addedToCartItmsInfo.filter(itm=>itm.name!==action.name),
+        itemsInTheCart:{...state.itemsInTheCart,[action.name]:numberOfItems},
         totalItemsInTheCart:totalItems?totalItems:0
       }
     }
