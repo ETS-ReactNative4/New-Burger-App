@@ -29,6 +29,8 @@ import {Link} from 'react-router-dom';
      if(!!this.props.id){
       if(this.props.totalPrice!==10){
         this.props.history.push('/checkout');
+        this.props.dispatch({type:'ORDER FROM CUSTOMIZED SECTION',value:true})
+        this.props.dispatch({type:'NORMAL ORDER',value:false})
        }else{  
         this.setState({Message:true});
         this.setState({loading:true});
@@ -37,7 +39,17 @@ import {Link} from 'react-router-dom';
         },2000)
        }
      }else{
-      this.props.history.push('/signin');
+      if(this.props.totalPrice>10){
+        this.props.dispatch({type:'ORDER FROM CUSTOMIZED SECTION',value:true})
+        this.props.dispatch({type:'NORMAL ORDER',value:false})
+        this.props.history.push('/signin');
+      }else{
+        this.setState({Message:true});
+        this.setState({loading:true});
+        setTimeout(()=>{
+          this.setState({loading:false,Message:false});
+        },2000)
+      }
      }
   
    }
@@ -77,9 +89,9 @@ import {Link} from 'react-router-dom';
             </Aux>    
           :
             <Link to="orders"><button className={classes.button}>Orders</button></Link> 
-        }
-         */}
-        
+        } */}
+        {!this.props.check_signup_link && <Link to="orders"><button className={classes.button}>Orders</button></Link> }
+      
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>

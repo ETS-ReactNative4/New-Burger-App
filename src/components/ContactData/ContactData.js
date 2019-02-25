@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import classes from './ContactData.module.scss';
 import Aux from '../../HOC/helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class ContactData extends Component{
 
   state={
@@ -17,17 +18,16 @@ class ContactData extends Component{
     const regEx=/^[a-z\s?\-?]+$/gi;
     if(e.target.value!==null){
       if(regEx.test(e.target.value)){
-        console.log(true)
+ 
         let getValue=e.target.value;
         let upgradeName={...this.state.data};
         upgradeName['name']=getValue;
         this.setState({data:upgradeName});
         e.target.className=classes.valid;
       }else{
-       console.log(false)
+       
         let upgradeName={...this.state.data};
         upgradeName['name']=null;
-        console.log(upgradeName)
         this.setState({data:upgradeName});
         e.target.className=classes.invalid;
       }
@@ -37,19 +37,22 @@ class ContactData extends Component{
   emailChangeHandler=(e)=>{
     const regEx=/^([\w\.?\-?]+)@([[a-z]+)(\.[a-z]{2,8})(\.[a-z]{2,8})?$/gi;
     if(e.target.value!==null){
+     
     if(regEx.test(e.target.value)){
+
       let getValue=e.target.value;
       let upgradeEmail={...this.state.data};
       upgradeEmail['email']=getValue;
       this.setState({data:upgradeEmail});
       e.target.className=classes.valid;
-    }}else{
-      console.log(false)
-        let upgradeName={...this.state.data};
-        upgradeName['email']=null;
-        console.log(upgradeName)
-        this.setState({data:upgradeName});
-      e.target.className=classes.invalid;
+    }else{
+
+        let upgradeEmail={...this.state.data};
+        upgradeEmail['email']=null;
+        console.log(upgradeEmail)
+        this.setState({data:upgradeEmail});
+       e.target.className=classes.invalid;
+    }
     }
 
     e.preventDefault();
@@ -83,7 +86,7 @@ class ContactData extends Component{
       this.setState({data:upgradeAddress});
       e.target.className=classes.valid;
     }else{
-      console.log(false)
+   
       let upgradeName={...this.state.data};
       upgradeName['address']=null;
       this.setState({data:upgradeName});
@@ -102,7 +105,7 @@ class ContactData extends Component{
       let mobile=this.state.data.mobile;
       let address=this.state.data.address;
       let data={name,email,mobile,address}
-      console.log(data)
+ 
       if(name  && email  && mobile  && address ){
         this.props.contactInfo(data);
         setTimeout(()=>{
@@ -136,9 +139,6 @@ class ContactData extends Component{
         let upgradeTableNo={...this.state.data};
         upgradeTableNo['tableNo']=getValue;
         this.setState({data:upgradeTableNo});
-        setTimeout(()=>{
-          console.log(this.state)
-        },100)
         e.target.className=classes.valid;
       }else{
         let getValue=e.target.value;
@@ -155,45 +155,97 @@ class ContactData extends Component{
     return(
       
       <form onSubmit={this.handleSubmit} className={classes.form}>
-            <div>    
+            <div style={{position:'relative',width:'100%'}}>    
                 <input 
                   placeholder="Name"
                   type="text"
                   onChange={this.nameChangeHandler}
+                  
                 />
                 <label>Name</label>
+                <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="red"
+                />
             </div>
             {this.props.selectedOption==='home'?
             <Aux>
-                <div>    
+                <div style={{position:'relative',width:'100%'}}>    
                     <input 
                       placeholder="Email"
                       type="text"
                       onChange={this.emailChangeHandler}
+                      
                     />
                     <label>Email</label>
+                    <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="red"
+                /> 
                 </div>
-                <div>    
+                <div style={{position:'relative',width:'100%'}}>    
                   <input 
                     placeholder="Mobile"
                     type="text"
-                    onChange={this.mobileChangeHandler}  
+                    onChange={this.mobileChangeHandler}
+                      
                   />
                   <label>Mobile</label>
+                  <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="red"
+                />
                 </div>
 
-                <div>    
+                <div style={{position:'relative',width:'100%'}}>    
                 <textarea 
                   placeholder="Address"
                   type="text"
-                  onChange={this.addressChangeHandler}     
+                  onChange={this.addressChangeHandler} 
+                      
                 />
                 <label>Address</label>
+                <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 0'}}
+                  size="2x"
+                  color="red"
+                />
                 </div>
             </Aux>
             :
-            <div> 
-              <select onChange={this.handleChange}>
+            <div style={{position:'relative',width:'100%'}}> 
+              <select onChange={this.handleChange} >
                 {!this.state.data.tableNo?
                   <option default value="">Select Table</option>
                   :null
@@ -209,12 +261,25 @@ class ContactData extends Component{
               </select>
               {!this.state.data.tableNo?
                   null
-               :<label style={{opacity:'1',transform: 'translateY(-390%)'}}>Table No</label>
+               :<label style={{opacity:'1',transform: 'translateY(-450%)'}}>Table No</label>
               }
-              
+              <FontAwesomeIcon
+                  icon={['fas','check-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 1%'}}
+                  size="2x"
+                  color="#6DB65B"
+                />
+                 <FontAwesomeIcon
+                  icon={['fas','times-circle']}
+                  style={{display:'inlineBlock',position:'absolute',right:'0',margin:'3% 0 0 1%'}}
+                  size="2x"
+                  color="red"
+                />     
             </div>
             }
-            <input type="submit" value="Order"/>
+            <div>
+              <input type="submit" value="Order" />
+            </div>
           </form>
     )
     

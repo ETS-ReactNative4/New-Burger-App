@@ -28,10 +28,10 @@ class Signin extends Component {
     firebase.auth().signInWithPopup(googleProvider).then(()=>{
       this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      if(this.props.totalPrice>10){
+      if(this.props.customizedOrder || this.props.normalOrder){
         this.props.history.push('/checkout');
        }else{
-        this.props.history.push("/");
+        this.props.history.push('/');
       }
     });;
   }
@@ -40,10 +40,10 @@ class Signin extends Component {
     firebase.auth().signInWithPopup(fbProvider).then(()=>{
       this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
-      if(this.props.totalPrice>10){
+      if(this.props.customizedOrder || this.props.normalOrder){
         this.props.history.push('/checkout');
        }else{
-        this.props.history.push("/");
+        this.props.history.push('/');
       }
     });;
    
@@ -61,10 +61,10 @@ class Signin extends Component {
     firebase.auth().signInWithEmailAndPassword(email, password).
     then(user=>{
       this.setState({err:false})
-      if(this.props.totalPrice>10){
+      if(this.props.customizedOrder || this.props.normalOrder){
         this.props.history.push('/checkout');
        }else{
-        this.props.history.push("/");
+        this.props.history.push('/');
       }
       this.setState({loading:false}) 
      
@@ -74,7 +74,6 @@ class Signin extends Component {
       // Handle Errors here.
       this.setState({err:true});
       this.setState({loading:false})
-      console.log(error)
       this.setState({errMsg:error.message});
       this.props.dispatch(signOut()); 
       this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
@@ -84,6 +83,7 @@ class Signin extends Component {
     });
   }
   render() {
+
     let fbBtn=[classes.button,classes.facebook];
     let googleBtn=[classes.button,classes.google];
     let loading=this.state.loading;
@@ -153,7 +153,9 @@ const mapStateToProps=state=>{
     ingredients:state.burgerReducer.ingredients,
     totalPrice:state.burgerReducer.totalPrice,
     check_signup_link:state.authReducer.check_signup_link,
-    id:state.authReducer.id
+    id:state.authReducer.id,
+    customizedOrder:state.adminReducer.customizedOrder,
+    normalOrder:state.adminReducer.normalOrder
   }
 }
 export default connect(mapStateToProps)(Signin);

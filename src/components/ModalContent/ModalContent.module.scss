@@ -64,7 +64,7 @@
   left:0;
   margin-top:7px;
   padding: .5rem;
-  background:#4f5d8a;;
+  background:#4f5d8a;
   text-transform: uppercase;
   color:white;
   border: transparent;
@@ -76,4 +76,11 @@
 .continueBtn:hover{
   color:white;
   background: #57699e;
+}
+.disableBtn{
+  background:#343536;
+  color:white;
+}
+.disableBtn:hover{
+  background:#343536;
 }

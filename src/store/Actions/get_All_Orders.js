@@ -1,5 +1,4 @@
-import {firebase} from '../../firebase/firebase';
-import moment from 'moment';
+
 export const getAllOrders=(id)=>{
   return dispatch =>{
     // var starCountRef = firebase.database().ref(`orders/${id}`);
@@ -10,23 +9,23 @@ export const getAllOrders=(id)=>{
     //   }
     //   dispatch({type:'GET_ALL_ORDERS',items:containerOrders})
     // })
-
-    fetch(`https://testing-bc79f.firebaseio.com/orders/${id}.json`)
-    .then(res=>res.json())
-    .then(data=>{
-      let containerOrders=[];
-      for(let key in data){
-        const info={
-          id:key,
-          ...data[key]
+ 
+      fetch(`https://testing-bc79f.firebaseio.com/orders/${id}.json`)
+      .then(res=>res.json())
+      .then(data=>{
+        let containerOrders=[];
+        for(let key in data){
+          const info={
+            id:key,
+            ...data[key]
+          }
+          containerOrders.push(info);
         }
-        containerOrders.push(info);
-      }
-      containerOrders.sort((a,b)=>(
-        a.cancelOrderTime<b.cancelOrderTime?1:-1
-      )
-      )
-      dispatch({type:'GET_ALL_ORDERS',items:containerOrders})
-    })
+        containerOrders.sort((a,b)=>(
+          a.cancelOrderTime<b.cancelOrderTime?1:-1
+        )
+        )
+        dispatch({type:'GET_ALL_ORDERS',items:containerOrders})
+      })    
   }
 }

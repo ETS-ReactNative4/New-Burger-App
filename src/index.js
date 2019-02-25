@@ -14,7 +14,7 @@ import filterReducer from './store/filterReducer';
 import {firebase} from './firebase/firebase';
 import {signIn} from './store/Actions/auth';
 import {getAllOrders} from './store/Actions/get_All_Orders';
-import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck,faTimesCircle,faMinusCircle} from "@fortawesome/free-solid-svg-icons";
+import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck,faTimesCircle,faMinusCircle,faCheckCircle,faTimes} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -30,8 +30,9 @@ library.add(
   faAngleDown,
   faCheck,
   faTimesCircle,
-  faMinusCircle
-  // more icons go here
+  faMinusCircle,
+  faCheckCircle,
+  faTimes
 );
 
 const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -45,17 +46,27 @@ const app= <Provider store={store}>
                 <App />
               </BrowserRouter>
             </Provider>
+  let checker=true;
+ 
   firebase.auth().onAuthStateChanged(user=> {  
     if (user) {    
       if(store.getState().authReducer.sign_In_With_Email){
         store.dispatch(signIn(user.uid));
         localStorage.setItem('id',user.uid);
         store.dispatch(getAllOrders(user.uid));
-        store.dispatch({type:'SIGNUP_LINK_FALSE'})
+        store.dispatch({type:'SIGNUP_LINK_FALSE'});
+        if(checker){
+          ReactDOM.render(app, document.getElementById('root'));
+          checker=false;
+        }
       }     
     }else{
       localStorage.removeItem('id');
-      store.dispatch({type:'SIGNUP_LINK_TRUE'})
+      store.dispatch({type:'SIGNUP_LINK_TRUE'});
+      if(checker){
+        ReactDOM.render(app, document.getElementById('root'));
+        checker=false;
+      }
     }
   });
 
@@ -75,30 +86,6 @@ const app= <Provider store={store}>
 
   })
 
-
-  // fetch(`https://admin-testing-burger-project.firebaseio.com/All Burgers.json`).
-  // then(res=>res.json())
-  // .then(data=>{
-  //   let allBurgers=[];
-  //   let prices={};
-  //   for(let key in data){
-  //     const info={
-  //       id:key,
-  //       ...data[key]
-  //     }
-  //     allBurgers.push(info);
-  //     prices[data[key].name]=data[key].price;
-  //   }
-
-  //   return {allBurgers,prices};
-  // }).then(({allBurgers,prices})=>{
-  //   if(!!allBurgers){
-  //     store.dispatch({type:'FETCH_BURGERS_FROM_ADMIN',allBurgers,prices})
-
-  //   }
- 
-  // })
-ReactDOM.render(app, document.getElementById('root'));
 
 
 // If you want your app to work offline and load faster, you can change

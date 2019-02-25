@@ -60,7 +60,7 @@
   height: 2.4rem;
   font-size: 1rem;
   -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
 }
 .add:hover{
   cursor:pointer;
@@ -102,4 +102,40 @@ clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
   font-size: 1rem;
   -webkit-clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
   clip-path: polygon(4% 0, 100% 0%, 95% 100%, 0% 100%);
+}
+@media only screen and (max-width: 1050px) {
+  .BuildControlContainer{
+    width:65%;
+  }
+
+}
+@media only screen and (max-width: 780px) {
+  .BuildControlContainer{
+    width:75%;
+  }
+  
+.text{
+  letter-spacing:1px;
+  font-size:20px;   
+}
+.add{
+  width:3.8rem;
+}
+.disable{
+  width:3.8rem;
+}
+}
+@media only screen and (max-width: 600px) {
+  .BuildControlContainer{
+    width:85%;
+  }
+
+}
+@media only screen and (max-width: 500px) {
+  .add{
+    width:3.4rem;
+  }
+  .disable{
+    width:3.4rem;
+  }
 }

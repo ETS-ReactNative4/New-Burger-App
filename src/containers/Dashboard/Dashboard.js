@@ -50,7 +50,7 @@ import AddToCart from '../../components/AddToCart/AddToCart';
   }
 
   render() {
-
+  
     return (
       <div className={classes.container} style={{backgroundImage:`linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.7)),url(${background})`,backgroundPosition:'top',backgroundAttachment :'fixed',height:`${this.props.getFilterBurger.length>0?'100%':'100vh'}`}}>
      
@@ -95,7 +95,7 @@ import AddToCart from '../../components/AddToCart/AddToCart';
               />
             </div>
         </section>
-         <AddToCart totalItems={this.props.totalItemsInTheCart}/>
+         <AddToCart totalItems={this.props.totalItemsInTheCart} {...this.props}/>
           <section className={classes.all_burgers}>{this.allBurgers()}
         </section>
       </main>

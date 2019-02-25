@@ -48,12 +48,13 @@
     transition: all .1s;
     cursor: pointer;
     color:white;
-    background: rgb(209, 209, 209);
-    font-weight: 700; 
+    background: none;
+    font-weight: 500; 
+    border:1px solid white;
   }
   .logout:hover{
-    background:white;
     color:rgb(209, 209, 209);
+    border-color: rgb(209, 209, 209);
   }
   .button_container{
     position: absolute;

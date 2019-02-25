@@ -15,6 +15,7 @@ class TotalOrders extends Component{
           {this.props.orders.map((order,index)=>
             <Order key={index} 
                   ingredients={order.ingredients} 
+                  items={order.items}
                   CustomerInfo={order.CustomerInfo}
                   totalPrice={order.totalPrice}
                   orderTime={order.orderTime}

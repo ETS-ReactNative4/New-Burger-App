@@ -1,5 +1,14 @@
 
-const initialState={allBurgers:[],price:{},itemsInTheCart:{},totalItemsInTheCart:0,addedToCartItmsInfo:[]};
+const initialState={
+  allBurgers:[],
+  price:{},
+  itemsInTheCart:{},
+  totalItemsInTheCart:0,
+  addedToCartItmsInfo:[],
+  orderType:'',
+  customizedOrder:false,
+  normalOrder:false
+};
 
 const adminReducer=(state=initialState,action)=>{
   switch(action.type){
@@ -52,7 +61,7 @@ const adminReducer=(state=initialState,action)=>{
     case 'ADDED TO CART ITEMS INFO':{
       let items=[];
       for(let itm in state.itemsInTheCart){
-        items.push({name:itm,quantity:state.itemsInTheCart[itm],price:state.price[itm]*state.itemsInTheCart[itm]})
+        items.push({name:itm,quantity:state.itemsInTheCart[itm],price:Number(state.price[itm])*state.itemsInTheCart[itm]})
       }
       return{
         ...state,
@@ -78,6 +87,38 @@ const adminReducer=(state=initialState,action)=>{
         totalItemsInTheCart:totalItems?totalItems:0
       }
     }
+    case 'CUSTOMIZED ORDER':{
+      return{
+        ...state,
+        orderType:action.value
+      }
+    }
+    case 'ORDER FROM CUSTOMIZED SECTION':{
+      return{
+        ...state,
+        customizedOrder:action.value
+      }
+    }
+    case 'NORMAL ORDER':{
+      return{
+        ...state,
+        normalOrder:action.value
+      }
+    }
+    case 'SET INITIAL ADMIN STATE':{
+      console.log('admin')
+      return{
+        ...state,
+        price:{},
+        itemsInTheCart:{},
+        totalItemsInTheCart:0,
+        addedToCartItmsInfo:[],
+        orderType:'',
+        customizedOrder:false,
+        normalOrder:false
+      }
+    }
+    
     default:return state;
     }
 }

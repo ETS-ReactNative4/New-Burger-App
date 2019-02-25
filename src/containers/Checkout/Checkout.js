@@ -18,17 +18,23 @@ class Checkout extends Component{
     message:false,
     contactInfo:'',
     error:false,
-    selectedOption:null
+    selectedOption:null,
+    customizedOrder:null
   }
   componentWillMount(){
-  
-    this.setState({ ingredients:this.props.ingredients,
-                    totalPrice:this.props.totalPrice
-                  })
+    if(!!this.props.customizedOrder){
+      this.setState({ ingredients:this.props.ingredients,totalPrice:this.props.totalPrice,customizedOrder:this.props.customizedOrder})
+    }else{
+      const totalPrice=this.props.cartItems.reduce((total,itm)=>{
+        return total+itm.price;
+      },0);
+      this.setState({totalPrice:totalPrice})
+    }
+    
   }
   successMessage=()=>(
             this.state.message ?
-            <p  style={{background:'#c9f658',color:'#36622b',display:'inline-block',padding:'10px',marginBottom:'8rem'}}>
+            <p  style={{background:'#c9f658',color:'#36622b',display:'inline-block',padding:'10px',marginTop:'3rem'}}>
             Sir Your order is successfully sent.We will try to deliver the product as soon as Possible
             </p>
             : null
@@ -40,13 +46,25 @@ class Checkout extends Component{
   //FROM ContactData component
   buy=()=>{
     this.setState({loading:true});
-    const data={
-      ingredients:this.state.ingredients,
-      totalPrice:this.state.totalPrice,
-      CustomerInfo:this.state.contactInfo,
-      orderTime:moment().valueOf(),
-      cancelOrderTime:moment().add(10,'minutes').valueOf()
-    };
+    let data;
+    if(!!this.props.customizedOrder){
+     data={
+        ingredients:this.state.ingredients,
+        totalPrice:this.state.totalPrice,
+        CustomerInfo:this.state.contactInfo,
+        orderTime:moment().valueOf(),
+        cancelOrderTime:moment().add(10,'minutes').valueOf()
+      };
+    }else{
+      data={
+        items:this.props.itemsInTheCart,
+        CustomerInfo:this.state.contactInfo,
+        orderTime:moment().valueOf(),
+        cancelOrderTime:moment().add(10,'minutes').valueOf(),
+        totalPrice:this.state.totalPrice
+      }
+    }
+  
 
     database.ref(`orders/${this.props.id}`).push(data).then(res=>{
       this.setState({loading:false,message:true});
@@ -56,41 +74,62 @@ class Checkout extends Component{
 
     setTimeout(()=>{
       this.props.history.push('/');
+      this.props.dispatch({type:'SET INITIAL ADMIN STATE'});
+      
     },3000)
   }
   handleOptionChange=(e)=>{
     this.setState({selectedOption:e.target.value})  
   }
   render(){
-      console.log(this.state.selectedOption)
       if(!this.state.loading){
         return(
-          <div style={{textAlign:'center'}} >
+          <div style={{textAlign:'center'}}>
             {this.successMessage()}
-            <Link to="/burgerBuilder"><button className={classes.button}>Go Back</button></Link>
-            <h1 style={{textAlign:'center',paddingTop:'2rem',color:'rgb(70, 12, 124)'}}>We hope it tastes well!!</h1>
+            <button className={classes.button} onClick={()=>{this.props.history.goBack()}}>Go Back</button>
+        {
+          !!this.state.customizedOrder?
+            <div><h1 style={{textAlign:'center',paddingTop:'2rem',color:'rgb(70, 12, 124)'}}>We hope it tastes well!!</h1>
             <BurgerIngredients layers={this.state.ingredients} totalPrice={this.state.totalPrice}/>
-            <div className={classes.location}>
+            </div>
+            :
+            <div className={classes.cartItems}>
+              <div> 
+                {this.props.cartItems.map((itm,index)=>(
+                  <React.Fragment key={index}>
+                    {index==0?<React.Fragment><h2 style={{textAlign:'center'}} className={classes.header}>Items</h2>
+                    <h2 style={{textAlign:'center'}} className={classes.header}>Quantity</h2>
+                    </React.Fragment>:null}
+                    <h2>{itm.name}</h2>
+                    <h2>{itm.quantity}</h2>
+                  </React.Fragment>
+              ))}         
+              </div>
+            </div>
+        }
+            <div className={classes.location}  style={{color:'#4831D4'}}>
               <h3>PLease Locate your location?</h3>
               <div className={classes.locationOPtion}>
-                <label>
+                <label style={{color:'#4831D4',fontWeight:'500'}}>
                     <input
                     type="radio"
                     name="react-tips"
                     value="restaurant"
                     checked={this.state.selectedOption === "restaurant"}
                     onChange={this.handleOptionChange}
+                    style={{marginRight:'.5rem'}}
                     />
                     Restaurant
                 </label>
-                <label>
+                <label style={{color:'#4831D4',fontWeight:'500'}}>
                     
                     <input
                     type="radio"
                     name="react-tips"
                     value="home"
                     checked={this.state.selectedOption === "home"}
-                    onChange={this.handleOptionChange}   
+                    onChange={this.handleOptionChange} 
+                    style={{marginRight:'.5rem'}}
                     />
                     Home/Office/Others..
                 </label>
@@ -98,16 +137,17 @@ class Checkout extends Component{
             </div>
             {
               !!this.state.selectedOption ?
-                <ContactData contactInfo={this.contactHandler} buy={this.buy}  error={(err)=>this.setState({error:err})} selectedOption={this.state.selectedOption}/> 
+              <div>
+                <ContactData contactInfo={this.contactHandler} buy={this.buy}  error={(err)=>this.setState({error:err})} selectedOption={this.state.selectedOption}/>
+              </div> 
               :null
             }
-            
-            <br/>
-            {this.state.error && !this.state.message?<p style={{background:'red',display:'inline-block',color:'white',fontSize:'1.4rem',padding:'10px',borderRadius:'5px'}}>Please fill in all fields</p>:null}         
+
+            {this.state.error && !this.state.message?<p style={{background:'red',display:'inline-block',color:'white',fontSize:'1rem',padding:'5px',borderRadius:'2px'}}>Please fill in all fields</p>:null}         
             </div>     
         )
       }else{
-        return <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)'}}><Loader/></div>
+        return <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',marginBottom:'2rem'}}><Loader/></div>
       }
  
   }
@@ -117,7 +157,10 @@ const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
     totalPrice:state.burgerReducer.totalPrice,
-    id:state.authReducer.id
+    id:state.authReducer.id,
+    customizedOrder:state.adminReducer.customizedOrder,
+    cartItems:state.adminReducer.addedToCartItmsInfo,
+    itemsInTheCart:state.adminReducer.itemsInTheCart
   }
 }
 

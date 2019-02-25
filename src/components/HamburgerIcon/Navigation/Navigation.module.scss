@@ -58,3 +58,14 @@
   transform: rotate(-5deg) scale(1.2);
   color: yellow;
 }
+@media only screen and (max-width: 920px) {
+  .ul_grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    grid-auto-rows: 8rem;
+  }
+}
