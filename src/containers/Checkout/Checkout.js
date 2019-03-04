@@ -131,7 +131,7 @@ class Checkout extends Component{
                     onChange={this.handleOptionChange} 
                     style={{marginRight:'.5rem'}}
                     />
-                    Home/Office/Others..
+                    Home/Others..
                 </label>
               </div>
             </div>

@@ -70,7 +70,7 @@
     transition: all .3s;
     cursor: pointer;
     font-weight: 700;
-    letter-spacing: .2ch;
+    letter-spacing: .01ch;
     transition: all .3s;
     transform:  rotate(-.8deg);
     border-bottom: 3px solid white;
@@ -179,5 +179,7 @@
         grid-template-columns: 19rem;
         padding-top: 4rem;
       }
-
+      .create_burger_btn{
+        padding: 18px;
+      }
     }

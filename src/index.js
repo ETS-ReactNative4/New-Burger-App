@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter,Router} from "react-router-dom";
 import { createStore,applyMiddleware, compose,combineReducers } from 'redux';
 import { Provider } from 'react-redux'
 import burgerReducer from './store/burgerReducer';
@@ -17,6 +17,10 @@ import {getAllOrders} from './store/Actions/get_All_Orders';
 import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck,faTimesCircle,faMinusCircle,faCheckCircle,faTimes} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { createBrowserHistory } from 'history';
+
+
+const history = createBrowserHistory();
 
 library.add(
   faMoneyBill,
@@ -42,9 +46,9 @@ const rootReducer={
 const store=createStore(combineReducers(rootReducer),composeEnhancer(applyMiddleware(thunk)));
                        
 const app= <Provider store={store}>
-              <BrowserRouter> 
+              <Router history={history}> 
                 <App />
-              </BrowserRouter>
+              </Router>
             </Provider>
   let checker=true;
  
@@ -58,6 +62,11 @@ const app= <Provider store={store}>
         if(checker){
           ReactDOM.render(app, document.getElementById('root'));
           checker=false;
+        }
+        if(store.getState().adminReducer.customizedOrder){
+          history.push('/checkout');
+        }else if(store.getState().adminReducer.normalOrder){
+          history.push('/checkout');
         }
       }     
     }else{

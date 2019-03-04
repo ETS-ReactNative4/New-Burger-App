@@ -19,7 +19,7 @@ const App=()=>(
           <Route path="/" exact component={Dashboard}/>
           <Route path='/burger/:id' component={SpecificBurger}/>
           <Route path="/burgerBuilder" component={BurgerBuilder}/>
-          <Route path="/checkout"  component={Checkout}/>
+          <PrivateRoute path="/checkout"  component={Checkout}/>
           <PrivateRoute path="/orders"  component={TotalOrders}/>
           <Route path="/signup"  component={Signup}/>
           <Route path="/signin"  component={Signin}/>

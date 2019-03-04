@@ -56,3 +56,10 @@
 .li div>h3{
   margin-bottom: 1rem;
 }
+
+@media only screen and (max-width: 690px) {
+  .li{
+    width:100%;
+    grid-template-columns:auto;
+  }
+}

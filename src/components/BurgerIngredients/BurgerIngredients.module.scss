@@ -10,3 +10,15 @@
   height:21rem;
   width:27rem;
 }
+@media only screen and (max-width: 700px) {
+  .Burger{
+    height:19rem;
+    width:24rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .Burger{
+    height:19rem;
+    width:21rem;
+  }
+}

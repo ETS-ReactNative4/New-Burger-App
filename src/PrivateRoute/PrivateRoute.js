@@ -42,7 +42,8 @@ import {connect} from 'react-redux';
 // export default connect(mapStateToProps)(PrivateRoute);
 
 export const PrivateRoute=({path,component:Component,id,...rest})=>{
-  let userid=!!localStorage.getItem('id');
+  // let userid=!!localStorage.getItem('id');
+  // console.log(id)
   // console.log(id)
   //  return <Route path={path} {...rest} component={(props)=>{
   //   if(userid){
@@ -52,7 +53,7 @@ export const PrivateRoute=({path,component:Component,id,...rest})=>{
   //   }
   // }
   // }/>
-  if(userid){
+  if(id){
     return <Route path={path}  component={Component} />
   }else{
     return <Redirect to="/" />

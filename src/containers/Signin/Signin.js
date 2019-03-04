@@ -41,9 +41,12 @@ class Signin extends Component {
       this.setState({loading:false}) 
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
       if(this.props.customizedOrder || this.props.normalOrder){
-        this.props.history.push('/checkout');
+        this.props.history.push('checkout');
+        console.log('customized ');
+        console.log(this.props.history)
        }else{
         this.props.history.push('/');
+        console.log('not customized ')
       }
     });;
    

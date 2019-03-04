@@ -46,12 +46,16 @@ class SpecificBurger extends Component {
             <h1 className={classes.title}>{name}</h1>
             <h3 className={classes.subTitle}>{description}</h3>
             <h3 className={classes.calories}>{calories} cal</h3>
-            <button className={classes.btn} onClick={()=>this.addToCart(name)}>Add to my Meal
-            <FontAwesomeIcon
-              icon={['fas',sign]}
-              transform="right-5 grow-2.5"
-            />
-            </button>
+            {
+              Object.keys(this.props.priceList).length > 0 ?
+              <button className={classes.btn} onClick={()=>this.addToCart(name)}>Add to my Meal
+                <FontAwesomeIcon
+                  icon={['fas',sign]}
+                  transform="right-5 grow-2.5"
+                />
+              </button> : null
+            }
+         
           </div>
           <div className={classes.imgContainer}>
             <img src={url} className={classes.img}></img>
@@ -67,7 +71,8 @@ const mapStateToProps=(state,props)=>{
   return{
     all_burgers:state.adminReducer.allBurgers,
     speceficItem:itm,
-    totalItemsInTheCart:state.adminReducer.totalItemsInTheCart
+    totalItemsInTheCart:state.adminReducer.totalItemsInTheCart,
+    priceList:state.adminReducer.price
   }
 }
 export default connect(mapStateToProps)(SpecificBurger);

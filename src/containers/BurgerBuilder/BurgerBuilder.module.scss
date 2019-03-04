@@ -27,7 +27,7 @@
   text-align:center;
   font-size:2rem;
   color:whitesmoke;
-  
+  margin-bottom:2rem;
 }
 .mainPrice{
   color:yellow;
@@ -96,4 +96,9 @@
 .signinButton:hover{
   background: #c9f658;
   color: #36622b;
+}
+@media only screen and (max-width: 500px) {
+  .price{
+    font-size:1.5rem;
+  }
 }

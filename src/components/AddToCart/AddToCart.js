@@ -14,7 +14,9 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
     width:'60%',
     height:'75%',
-    overflow:'hidden'
+    overflow:'hidden',
+    width:'90%',
+    padding:'5px'
   }
 
 };
@@ -42,7 +44,6 @@ const customStyles = {
             <FontAwesomeIcon
               icon={['fas','angle-down']}
               transform="right-5 grow-2.5 down-2"
-            
             />
               </p>
           </div>:''

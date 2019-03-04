@@ -1,5 +1,4 @@
 import React from 'react';
-import HamburgerIcon from '../HamburgerIcon/HamburgerIcon';
 import {connect} from 'react-redux';
 import classes from './Layout.module.scss';
 import {firebase} from '../../firebase/firebase';
@@ -13,7 +12,6 @@ const Layout=(props)=>{
           <div {...props} style={{ ...style, backgroundColor: '#dfe2e2',width:'4',opacity: '0.5'}}/>
       }>
     <div>
-      <HamburgerIcon />
       <main>
         {props.children}
       </main>

@@ -56,11 +56,12 @@ class ModalContent extends Component {
               icon={['fas','times-circle']}
               color="red"
               style={{cursor:'pointer'}}
-              transform="grow-6 down-8"
+              transform="grow-8 down-8 left-0"
               onClick={()=>{this.props.closeModal()}}
+              className={classes.closeBtn}
           />
         </div>
-        { this.state.totalItemsInTheCart>0 ?
+        { this.props.totalItemsInTheCart>0 ?
               this.props.allItemsInTheCart.map(({name,quantity,price},index)=>(
                <div className={classes.content} key={name}>
                   <div className={classes.itmList} style={{marginTop:'12px'}}> 
@@ -68,23 +69,23 @@ class ModalContent extends Component {
                     <div style={{display:'grid',gridTemplateColumns:'auto 3fr auto',background: 'black',gridGap:'7px',alignItems:'center',color:'white',padding:'10px'}}>
                       <FontAwesomeIcon
                           icon={['fas','times-circle']}
-                          style={{cursor:'pointer',fontSize:'25px'}}
                           color="red"
                           onClick={()=>{this.deleteItemFromCart(name)}}
+                          className={classes.removeBtn}
                       />
-                      <h3 >{quantity} x {name}</h3>
+                      <h3 className={classes.burgerName}>{quantity} x {name}</h3>
                       <div style={{display:'grid',gridGap:'7px',gridTemplateColumns:'1fr 1fr'}}>
                       <FontAwesomeIcon
                         icon={['fas','plus-circle']}
-                        style={{cursor:'pointer',fontSize:'25px',margin:'0'}}
                         color="#c9f658"
                         onClick={()=>this.addToCart(name,quantity)}
+                        className={classes.increaseBtn}
                       />
                       <FontAwesomeIcon
                           icon={['fas','minus-circle']}
-                          style={{cursor:'pointer',fontSize:'25px'}}
                           color="red"
                           onClick={()=>this.removeFromCart(name)}
+                          className={classes.decreaseBtn}
                       />
                       </div>
                     </div>
@@ -98,7 +99,7 @@ class ModalContent extends Component {
           ):<h2>Please add burgers in the cart</h2>
         }
    
-        <button className={this.state.totalItemsInTheCart>0 ? classes.continueBtn :[classes.continueBtn,classes.disableBtn].join(' ')} disabled={this.state.totalItemsInTheCart===0} onClick={this.handleContinue}>Continue</button>
+        <button className={this.props.totalItemsInTheCart>0 ? classes.continueBtn :[classes.continueBtn,classes.disableBtn].join(' ')} disabled={this.props.totalItemsInTheCart===0} onClick={this.handleContinue}>Continue</button>
         <p className={classes.totalPrice}>Total : {this.props.allItemsInTheCart.reduce((total,itm)=>{
           return total+itm.price;
         },0)}</p>
@@ -111,7 +112,8 @@ const mapStateToProps=state=>{
   return{
     allItemsInTheCart:state.adminReducer.addedToCartItmsInfo,
     allItems:state.adminReducer.itemsInTheCart,
-    id:state.authReducer.id
+    id:state.authReducer.id,
+    totalItemsInTheCart:state.adminReducer.totalItemsInTheCart
   }
 }
 export default connect(mapStateToProps)(ModalContent);

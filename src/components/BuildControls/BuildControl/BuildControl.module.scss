@@ -120,9 +120,15 @@
 }
 .add{
   width:3.8rem;
+  height: 2rem;
 }
 .disable{
   width:3.8rem;
+  height: 2rem;
+}
+.remove{
+  width:3.8rem;
+  height: 2rem;
 }
 }
 @media only screen and (max-width: 600px) {
@@ -133,9 +139,12 @@
 }
 @media only screen and (max-width: 500px) {
   .add{
-    width:3.4rem;
+    width:3.2rem;
   }
   .disable{
-    width:3.4rem;
+    width:3.2rem;
+  }
+  .remove{
+    width:3.2rem;
   }
 }
