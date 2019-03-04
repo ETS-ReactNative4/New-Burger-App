@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import classes from './Layout.module.scss';
-import {firebase} from '../../firebase/firebase';
-import {signOut} from '../../store/Actions/auth';
+import HamburgerIcon from '../HamburgerIcon/HamburgerIcon';
 import { withRouter } from "react-router";
 import { Scrollbars } from 'react-custom-scrollbars';
 const Layout=(props)=>{
@@ -12,6 +10,7 @@ const Layout=(props)=>{
           <div {...props} style={{ ...style, backgroundColor: '#dfe2e2',width:'4',opacity: '0.5'}}/>
       }>
     <div>
+    <HamburgerIcon />
       <main>
         {props.children}
       </main>

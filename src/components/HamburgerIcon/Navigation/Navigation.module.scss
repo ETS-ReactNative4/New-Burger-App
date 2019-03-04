@@ -28,6 +28,7 @@
   .ul_grid .li:nth-child(#{$x}){
     list-style: none;
     text-align: center;
+    display: none;
     opacity:0;
     transition:$x * 0.1s + .2s;
     transition-delay:$x * .01s; 
@@ -37,6 +38,7 @@
 @for $x from 1 through 4{
   .show.li:nth-child(#{$x}) {
     transform: translateY(0);
+    display:block;
     opacity: 1;
     transition:$x * 0.2s + .2s;
     transition-delay:$x * 0.13s + .1s;
