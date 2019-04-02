@@ -79,7 +79,7 @@ class ContactData extends Component{
   addressChangeHandler=(e)=>{
     const regEx=/.+/gi;
     if(e.target.value!==null){
-    if(regEx){
+    if(regEx.test(e.target.value)){
       let getValue=e.target.value;
       let upgradeAddress={...this.state.data};
       upgradeAddress['address']=getValue;
@@ -226,7 +226,6 @@ class ContactData extends Component{
                   placeholder="Address"
                   type="text"
                   onChange={this.addressChangeHandler} 
-                      
                 />
                 <label>Address</label>
                 <FontAwesomeIcon

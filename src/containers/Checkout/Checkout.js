@@ -3,11 +3,8 @@ import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredie
 import Loader from '../../components/UI/Loader/Loader';
 import ContactData from '../../components/ContactData/ContactData';
 import {connect} from 'react-redux';
-import initalState from '../../store/Actions/InitialState';
 import {getAllOrders} from '../../store/Actions/get_All_Orders';
-import pic from '../../pic/1.jpeg';
 import classes from './Checkout.module.scss';
-import {Link} from 'react-router-dom';
 import {database} from '../../firebase/firebase';
 import moment from 'moment';
 class Checkout extends Component{
@@ -65,18 +62,18 @@ class Checkout extends Component{
       }
     }
   
-
     database.ref(`orders/${this.props.id}`).push(data).then(res=>{
       this.setState({loading:false,message:true});
       this.props.dispatch(getAllOrders(this.props.id));
+      fetch(`https://admin-testing-burger-project.firebaseio.com/orders/${this.props.id}.json`, {
+        method: 'POST',
+        mode: "cors",
+        body:JSON.stringify({...data,id:res.key})
+      })
+      this.props.dispatch({type:'SET AFTER ORDER'});
       })
     .catch(err=>{this.setState({loading:false})})
 
-    setTimeout(()=>{
-      this.props.history.push('/');
-      this.props.dispatch({type:'SET INITIAL ADMIN STATE'});
-      
-    },3000)
   }
   handleOptionChange=(e)=>{
     this.setState({selectedOption:e.target.value})  
@@ -86,7 +83,6 @@ class Checkout extends Component{
         return(
           <div style={{textAlign:'center'}}>
             {this.successMessage()}
-            <button className={classes.button} onClick={()=>{this.props.history.goBack()}}>Go Back</button>
         {
           !!this.state.customizedOrder?
             <div><h1 style={{textAlign:'center',paddingTop:'2rem',color:'rgb(70, 12, 124)'}}>We hope it tastes well!!</h1>

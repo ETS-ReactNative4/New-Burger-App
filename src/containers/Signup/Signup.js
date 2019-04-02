@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Signup.module.scss';
 import {firebase,googleProvider,fbProvider,database} from '../../firebase/firebase';
 import {connect} from 'react-redux';
-import {signIn,signOut} from '../../store/Actions/auth';
+import {signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Aux from '../../HOC/helper';
 import Loader from '../../components/UI/Loader/Loader';
@@ -128,7 +128,7 @@ class Signup extends Component {
                   </div>    
                   : null
               }
-              <p style={{display:'inlineBlock',position:'relative',bottom:'2rem',fontWeight:'600',color:'white'}}>Already have an Acount?<NavLink to="/signin" className={classes.signinLink}>Log in</NavLink></p>
+              <p style={{display:'inlineBlock',position:'relative',bottom:'2rem',fontWeight:'600',color:'white',padding:'.5rem'}}>Already have an Acount?<NavLink to="/signin" className={classes.signinLink}>Log in</NavLink></p>
           </div>
         }
           

@@ -3,7 +3,8 @@ const initialState={
   search:null,
   price:null,
   sortedBy:null,
-  types:null
+  types:'',
+  burgerTypeName:'All Burgers'
 }
 
 const filters=(state=initialState,action)=>{
@@ -30,6 +31,21 @@ switch(action.type){
     return{
       ...state,
       types:action.name
+    }
+  }
+  case 'BURGER_TYPE_NAME':{
+    return{
+      ...state,
+      burgerTypeName:action.name
+    }
+  }
+  case 'INITIAL_STATE':{
+    return{
+      search:null,
+      price:null,
+      sortedBy:null,
+      types:'',
+      burgerTypeName:'All Burgers'
     }
   }
 

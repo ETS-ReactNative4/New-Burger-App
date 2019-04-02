@@ -1,102 +1,217 @@
-
 .container{
   display:grid;
-  grid-template-columns:5fr 4fr;
-  height:100vh;
-  background: ghostwhite;
+  grid-template-columns: 3fr 25rem;
+  height:105vh;
+  overflow: hidden;
 }
-.info{
-  margin:auto auto;
+.descriptionContainer{
+  background: white;
+  padding:3rem 0;
+}
+.description{
+  display:grid;
+  grid-gap:.5rem;
+}
+.checkout{
+  background: white;
+  box-shadow: -5px 5px 5px 5px whitesmoke;
+  padding-top: 5rem;
+}
+.row{
+  width:90%;
+  margin:0 auto;
+}
+.itemsContainer{
+  margin-top:4rem;
+  display:grid;
+  grid-gap:1.4rem;
+}
+.items{
+  display:grid;
+  grid-template-columns: 73% 25%;
+  grid-gap:3%;
+  position: relative;
+}
+.itemDes{
+  padding:0;
+  display:grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-gap:5px;
+}
+.meal{
+  border-bottom: 3px solid black;
+  text-align: center;
+  padding-bottom:.7rem;
+}
+
+.viewCart{
+  position: fixed;
+  bottom:0;
   padding:1rem;
+  display:none;
+  background: #4f5d8a;
+  z-index: 3000;
+  color:ghostwhite;
+  font-size:1.2rem;
+  font-weight: 500;
+  border:none;
+  width:100%;
+}
+.viewCart:hover{
+  cursor: pointer;
+  background: #5c6b9c;
 }
 .imgContainer{
-  display:grid;
-  justify-items: start;
-  align-items: center;
+  position: relative;
+  height:20rem;
+  width:25rem;
 }
-.img{
-  height:50%;
-  width:88%;
+.burgerImg{
+  position: absolute;
+  height:100%;
+  width:100%;
 }
-.title{
-  font-size: 4.5rem; 
-  color:#3C5A99;
+.name{
+  font-size: 4.5rem;
+  color: #3C5A99;
 }
-.subTitle{
+.statement{
   font-size: 1.2rem;
   font-family: 'Lato';
   font-weight: 400;
-  margin:1rem 0;
-  color:rgb(95, 117, 167);
+  margin: 1rem 0;
+  color: #5f75a7;
 }
-.calories{
+.calorie{
   font-size: 2rem;
-  color:rgb(95, 117, 167);
+  color: #5f75a7;
 }
-.btn{
+.addToMeal{
+  align-self: start;
+  justify-self: start;
   padding: 0 5px;
   background: #a6cb12;
-  margin:1rem 0;
+  margin: .4rem 0;
   cursor: pointer;
   border-radius: 6px;
-  color:white;
+  color: white;
   border: none;
   padding: 5px 10px 5px 10px;
   font-size: 1.2rem;
   font-weight: 500;
 }
-@media only screen and (max-width: 1120px) {
+
+.removeBtn:hover{
+  cursor: pointer;
+}
+.increaseBtn:hover{
+  cursor: pointer;
+}
+.decreaseBtn:hover{
+  cursor: pointer;
+}
+.continue{
+  align-self: start;
+  justify-self: start;
+  padding: 0 5px;
+  background:#4f5d8a;
+  margin: 1rem 0;
+  cursor: pointer;
+  border-radius: 6px;
+  color: white;
+  border: none;
+  padding: 5px 10px 5px 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.continue:hover{
+  color:white;
+  background: #57699e;
+}
+
+@media only screen and (max-width: 1050px) {
   .container{
-    display:grid;
-    grid-template-columns:1fr 1.3fr;
-    height:100vh;
+    grid-template-columns: 1fr;
   }
-  .title{
-    font-size: 3rem;
-    line-height: 120%; 
+  .checkout{
+    display: none;
   }
-  .subTitle{
-    font-size: 1.3rem;
+  .viewCart{
+    display: block;
   }
-  .calories{
-    font-size: 1.5rem;
-    margin:1rem 0;
+  .row{
+    width:92%;
+  }
+  .imgContainer{
+      height:19rem;
+      width:24rem;
+  }
+  .name{
+    font-size:3.7rem;
+  }
+  .statement {
+  font-size: 1rem;
+  }
+  .calorie {
+  font-size: 1.7rem;
+  }
+  .addToMeal {
+    padding: 3px 8px 3px 8px;
+    font-size: 1rem;
+  }
+  .descriptionContainer{
+    background: white;
+    padding:2rem 0;
   }
 
 }
-@media only screen and (max-width: 795px) {
-  .container{
-    display:grid;
-    grid-template-columns:1fr;
-    grid-template-rows: auto 1fr;
-    height:100vh;
+@media only screen and (max-width: 700px) {
+
+  .name{
+    font-size:3rem;
   }
-  .title{
-    font-size: 4rem;  
-  }
-  .subTitle{
-    font-size: 1.1rem;
-  }
-  .calories{
-    font-size: 2rem;
-    margin:1rem 0;
-  }
-  .imgContainer{
-    display:grid;
-    justify-items: center;
-    align-items: center;
-  }
-  .img{
-    height:80%;
-    width:80%;
-  }
+  .descriptionContainer{
+    padding:1.5rem 0;
 }
-@media only screen and (max-width: 520px) {
-  .title{
-    font-size: 3rem;  
-  }
-  .img{
-    height:70%;
-    width:100%;
-  }
 }
+@media only screen and (max-width: 500px) {
+    .row{
+      width:97%;
+    }
+    .imgContainer{
+        height:15rem;
+        width:20rem;
+    }
+    .name{
+      font-size:2.5rem;
+    }
+    .viewCart{
+      padding: .5rem;
+    }
+    .statement {
+    font-size: 1rem;
+    }
+    .calorie {
+    font-size: 1.4rem;
+    }
+    .addToMeal {
+        padding: 3px 8px 3px 8px;
+        font-size: 1rem;
+    }
+    .descriptionContainer{
+      background: white;
+      padding:.5rem 0;
+    }
+    .container{
+      height:109vh;
+    }
+
+}
+
+// @media only screen and (max-width: 1050px) {
+//   .imgContainer{
+//     height:12rem;
+//     width:20rem;
+// }
+
+// }

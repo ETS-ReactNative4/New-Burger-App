@@ -71,7 +71,7 @@ class Order extends Component {
           :null
           }
         </div>
-        <div style={{whiteSpace:'nowrap'}}>
+        <div>
               <React.Fragment>
                 {this.state.customerInfo.map(itm=>{
                     for(let key in itm){
@@ -79,7 +79,7 @@ class Order extends Component {
                     }
                   })}
               </React.Fragment>
-          <h3 style={{background:'white',padding:'5px',color:'black'}}>Order Time:{moment(this.props.orderTime).calendar()}</h3>
+          <h3 style={{background:'white',padding:'5px',color:'black'}} className={classes.orderTime}>Order Time:{moment(this.props.orderTime).calendar()}</h3>
         </div>         
       </li>
 

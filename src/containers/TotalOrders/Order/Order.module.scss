@@ -61,5 +61,15 @@
   .li{
     width:100%;
     grid-template-columns:auto;
+    margin:1rem auto;
+  }
+
+}
+@media only screen and (max-width: 500px) {
+  .li{
+    width:99%;
+  }
+  .orderTime{
+    font-size: .9rem;
   }
 }

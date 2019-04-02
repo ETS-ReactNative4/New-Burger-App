@@ -55,21 +55,22 @@ import AddToCart from '../../components/AddToCart/AddToCart';
       <div className={classes.container} style={{backgroundImage:`linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.7)),url(${background})`,backgroundPosition:'center',backgroundAttachment :'fixed',height:`${this.props.getFilterBurger.length>0?'100%':'100vh'}`}}>
      
       <header>
-      {this.props.check_signup_link ?
-        <div className={classes.button_container}>
-          <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
-          <Link to="signin"><button className={classes.signinButton}>Sign In</button></Link>
-        </div>
-        :<button onClick={()=>{
-          firebase.auth().signOut().then(()=>{
-          this.props.dispatch(signOut()); 
-          this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
-          this.props.history.push('/');
-      })
-      }}
-      className={classes.logout}
-      >Log Out</button>
-      }
+        {this.props.check_signup_link ?
+          <div className={classes.button_container}>
+            <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
+            <Link to="signin"><button className={classes.signinButton}>Sign In</button></Link>
+          </div>
+          :<button onClick={()=>{
+            firebase.auth().signOut().then(()=>{
+            this.props.dispatch(signOut()); 
+            this.props.dispatch({type:'SIGN_UP_WITH_EMAIL'});
+            this.props.history.push('/');
+        })
+        }}
+        className={classes.logout}
+        >Log Out</button>
+        }
+        <Link to="TestingDashboard"><button style={{padding:'20px',width:'40%',background:'red'}}>Testing</button></Link>
       </header>
       <main>
         <section className={classes.afterHeader}>
@@ -82,7 +83,7 @@ import AddToCart from '../../components/AddToCart/AddToCart';
                 tipProps={{ overlayClassName: 'foo',padding:'10px' }}
                 onChange={this.sliderChange}
                 min={200} max={800}
-                defaultValue={this.props.filterReducer.price?this.props.filterReducer.price:700}
+                defaultValue={this.props.filterReducer.price?this.props.filterReducer.price:500}
                 handleStyle={{
                 height: 22,
                 width: 22,

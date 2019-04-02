@@ -118,6 +118,17 @@ const adminReducer=(state=initialState,action)=>{
         normalOrder:false
       }
     }
+    case 'SET AFTER ORDER':{
+      return{
+        ...state,
+        itemsInTheCart:{},
+        totalItemsInTheCart:0,
+        addedToCartItmsInfo:[],
+        orderType:'',
+        customizedOrder:false,
+        normalOrder:false
+      }
+    }
     
     default:return state;
     }

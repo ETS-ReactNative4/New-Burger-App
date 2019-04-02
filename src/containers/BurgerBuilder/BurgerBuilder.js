@@ -80,18 +80,6 @@ import {Link} from 'react-router-dom';
 
     return(
       <Aux>
-{/*         
-        {this.props.check_signup_link
-          ?
-            <Aux>
-              <Link to="signup"><button className={classes.signupButton}>Sign Up</button></Link>
-              <Link to="signin"><button className={classes.signinButton}>Sign In</button></Link>
-            </Aux>    
-          :
-            <Link to="orders"><button className={classes.button}>Orders</button></Link> 
-        } */}
-        {!this.props.check_signup_link && <Link to="orders"><button className={classes.button}>Orders</button></Link> }
-      
         <BurgerIngredients layers={this.props.ingredients} totalPrice={this.props.totalPrice}/>
         <div className={classes.BuildContolsContainer}>
           <p className={classes.price} ><strong>Total Price: </strong><span className={classes.mainPrice}>{this.props.totalPrice} </span>tk</p>

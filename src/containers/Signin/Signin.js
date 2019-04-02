@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './Signin.module.scss';
 import {firebase,googleProvider,fbProvider,database} from '../../firebase/firebase';
 import {connect} from 'react-redux';
-import {signIn,signOut} from '../../store/Actions/auth';
+import {signOut} from '../../store/Actions/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Aux from '../../HOC/helper';
 import Loader from '../../components/UI/Loader/Loader';
@@ -42,11 +42,8 @@ class Signin extends Component {
       this.props.dispatch({type:'SIGN_IN_WITH_EMAIL'});
       if(this.props.customizedOrder || this.props.normalOrder){
         this.props.history.push('checkout');
-        console.log('customized ');
-        console.log(this.props.history)
        }else{
         this.props.history.push('/');
-        console.log('not customized ')
       }
     });;
    

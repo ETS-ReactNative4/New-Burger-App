@@ -1,8 +1,6 @@
 import React,{Component} from 'react';
 import classes from './TotalOrders.module.scss';
-import Loader from '../../components/UI/Loader/Loader';
 import Order from './Order/Order';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 class TotalOrders extends Component{
@@ -10,7 +8,6 @@ class TotalOrders extends Component{
   render(){
     let result; 
     result= <div className={classes.container}>
-      <Link to="/burgerBuilder"><button className={classes.button}>Go Back</button></Link>
       <ul className={classes.ul}>
           {this.props.orders.map((order,index)=>
             <Order key={index} 

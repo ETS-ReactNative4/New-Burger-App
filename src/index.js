@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter,Router} from "react-router-dom";
+import { Router} from "react-router-dom";
 import { createStore,applyMiddleware, compose,combineReducers } from 'redux';
 import { Provider } from 'react-redux'
 import burgerReducer from './store/burgerReducer';
@@ -15,12 +15,12 @@ import {firebase} from './firebase/firebase';
 import {signIn} from './store/Actions/auth';
 import {getAllOrders} from './store/Actions/get_All_Orders';
 import { faCode, faHighlighter,faMoneyBill ,faEnvelope, faThumbsUp,faPlus, faPlusCircle,faAngleDown,faCheck,faTimesCircle,faMinusCircle,faCheckCircle,faTimes} from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faGoogle} from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faGoogle,faTwitter} from "@fortawesome/free-brands-svg-icons";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { createBrowserHistory } from 'history';
 
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 library.add(
   faMoneyBill,
@@ -36,7 +36,8 @@ library.add(
   faTimesCircle,
   faMinusCircle,
   faCheckCircle,
-  faTimes
+  faTimes,
+  faTwitter
 );
 
 const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
